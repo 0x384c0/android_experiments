@@ -1,0 +1,115 @@
+<resources>
+
+    <!-- Base application theme. -->
+
+    <style name="AppTheme" parent="Base.AppTheme" />
+
+    <style name="Base.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="listPopupWindowStyle">@style/ListPopupWindow</item>
+    </style>
+
+    <style name="AppTheme.Detail" parent="AppTheme" />
+
+
+    <!-- Yotsugi -->
+    <style name="AppTheme.YotsugiTheme" parent="AppTheme">
+        <item name="colorAccent">@color/yotsugi_colorAccent</item>
+        <item name="android:colorBackground">@color/yotsugi_colorPrimaryWhite</item>
+        <item name="colorPrimary">@color/yotsugi_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/yotsugi_colorPrimaryDark</item>
+    </style>
+
+    <style name="Theme.Transparent" parent="AppTheme.YotsugiTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/white_trans200</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+    <!-- Cardview -->
+    <style name="MyCardView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/default_padding_medium</item>
+        <item name="android:layout_marginRight">@dimen/default_padding_medium</item>
+        <item name="android:layout_marginTop">@dimen/default_padding_small</item>
+        <item name="android:layout_marginBottom">@dimen/default_padding_small</item>
+        <item name="android:animateLayoutChanges">true</item>
+        <item name="android:foreground">?selectableItemBackground</item>
+    </style>
+
+    <!-- Cardview actions  couse "?android:attr/borderlessButtonStyle" is only for lollipop-->
+    <style name="CardViewAction">
+        <item name="android:layout_marginLeft">@dimen/default_padding_large</item>
+        <item name="android:layout_marginRight">@dimen/default_padding_large</item>
+    </style>
+
+    <!-- Cardview action image -->
+    <style name="CardViewActionImage" parent="Base.Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingRight">@dimen/default_padding_large</item>
+        <item name="android:paddingLeft">@dimen/default_padding_large</item>
+        <item name="android:tint">@color/gray</item>
+    </style>
+
+    <!-- Cardview title -->
+    <style name="CardViewTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">?android:selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:padding">@dimen/default_padding_medium</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <!-- Floating action menu background -->
+    <style name="fab_menu_labels_style">
+        <item name="android:background">@drawable/fab_label_background</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginRight">24dp</item>
+    </style>
+
+    <!-- Cardview section -->
+    <style name="CardViewSection">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/default_padding_large</item>
+        <item name="android:layout_marginRight">@dimen/default_padding_large</item>
+    </style>
+
+    <!-- Cardview separator -->
+    <style name="CardViewSeparator">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/gray_light</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.Transparent.Animation" parent="Theme.Transparent">
+        <item name="android:windowEnterAnimation">@anim/activity_in</item>
+        <item name="android:windowExitAnimation">@anim/activity_out</item>
+    </style>
+
+    <style name="PopUpListViewAnimation">
+        <item name="android:windowEnterAnimation">@anim/dialog_open_animation</item>
+        <item name="android:windowExitAnimation">@anim/dialog_close_animation</item>
+    </style>
+
+    <style name="ListPopupWindow" parent="@style/Widget.AppCompat.ListPopupWindow">
+        <item name="android:popupAnimationStyle">@style/PopUpListViewAnimation</item>
+        <item name="android:dropDownVerticalOffset">-50dip</item>
+        <item name="android:dropDownHorizontalOffset">-5dip</item>
+    </style>
+</resources>

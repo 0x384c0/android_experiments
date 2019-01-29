@@ -1,0 +1,116 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'me.tatarka:gradle-retrolambda:2.5.0'
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url  "http://dl.bintray.com/0x384c0/maven"
+    }
+}
+
+
+apply plugin: 'me.tatarka.retrolambda'
+android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.desu.experiments"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+            'proguard-rules.pro'
+        }
+    }
+    packagingOptions {//fix for butterknife and realm duplicate error
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+
+
+repositories {
+    mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    //faded toolbar
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    compile 'com.github.manuelpeinado.fadingactionbar:fadingactionbar:3.1.2'
+    //Support design
+    compile 'com.android.support:design:23.3.0'
+    compile 'com.android.support:recyclerview-v7:23.3.0'
+    compile 'com.android.support:cardview-v7:23.3.0'
+    compile 'com.android.support:palette-v7:23.3.0'
+    //fab transitions
+    compile 'konifar:fab-transformation:1.0.0'
+    //Material Range Bar
+    compile 'com.github.0x384c0:material-range-bar:1.3.1'
+    //Google play search
+    compile 'com.github.0x384c0:googleplay-searchbar:1.0.5'
+    //Images
+    compile 'com.facebook.fresco:fresco:0.8.1'
+    //rx
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'io.reactivex:rxjava:1.0.15'
+    compile 'io.reactivex:rxjava-math:1.0.0'
+    compile 'com.jakewharton.rxbinding:rxbinding:0.3.0' //min sdk - 14
+    //stream API
+    compile 'com.annimon:stream:1.0.3'
+    //network
+    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
+    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
+    compile 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'
+    compile 'com.squareup.okhttp:logging-interceptor:2.6.0'
+    //database
+    compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
+    compile 'io.realm:realm-android:0.84.1'
+    //scheduler
+    compile 'com.path:android-priority-jobqueue:1.1.2'
+    //pass validation
+    compile 'org.passay:passay:1.1.0'
+    //Testing dependencies
+    androidTestCompile 'com.android.support.test:runner:0.4'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
+    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2.1') {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude module: 'recyclerview-v7'
+    }
+
+    compile 'com.google.dagger:dagger:2.0.2'
+    apt 'com.google.dagger:dagger-compiler:2.0.2'
+    compile 'javax.annotation:jsr250-api:1.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha1'
+}

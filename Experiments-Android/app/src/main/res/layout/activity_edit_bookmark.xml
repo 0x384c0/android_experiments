@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="ItemBookmark"
+            type="com.desu.experiments.viewModel.item.ItemBookmarkViewModel"/>
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.desu.experiments.view.widget.OverScrollView
+            android:id="@+id/overscroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view1"
+                style="@style/MyCardView"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:transitionName="@string/trans_cardview"
+                card_view:cardCornerRadius="3dp"
+                card_view:cardUseCompatPadding="true">
+
+                <com.desu.experiments.view.widget.LockableScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include
+                            layout="@layout/item_bookmark_header"
+                            bind:ItemBookmark="@{ItemBookmark}"/>
+
+                        <!--Detail section-->
+
+                        <include
+                            layout="@layout/item_bookmark_detail_section"
+                            bind:ItemBookmark="@{ItemBookmark}"/>
+
+                        <!--Body section-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="@dimen/default_padding_large">
+
+                            <!--Custom title-->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:padding="@dimen/default_padding_medium"
+                                    android:src="@drawable/ic_format_size_24dp"
+                                    android:tint="@color/gray"/>
+
+                                <!-- Dummy collectionItem to prevent AutoCompleteTextView from receiving focus -->
+                                <LinearLayout
+                                    android:layout_width="0px"
+                                    android:layout_height="0px"
+                                    android:focusable="true"
+                                    android:focusableInTouchMode="true"/>
+
+                                <!-- :nextFocusUp and :nextFocusLeft have been set to the id of this component
+                                     to prevent the dummy from receiving focus again -->
+
+                                <android.support.design.widget.TextInputLayout
+                                    xmlns:app="http://schemas.android.com/tools"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="24dp"
+                                    android:layout_marginRight="24dp"
+                                    app:errorEnabled="false">
+
+                                    <EditText
+                                        android:id="@+id/edittext_title_custom"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:hint="Yotsugi"
+                                        android:imeOptions="actionDone"
+                                        android:inputType="textCapSentences"
+                                        android:nextFocusLeft="@id/edittext_title_custom"
+                                        android:nextFocusUp="@id/edittext_title_custom"
+                                        android:padding="@dimen/default_padding_medium"
+                                        android:textSize="@dimen/text_medium"/>
+                                </android.support.design.widget.TextInputLayout>
+
+
+                            </LinearLayout>
+
+                            <!--Tags-->
+                            <LinearLayout
+                                xmlns:fresco="http://schemas.android.com/apk/res-auto"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <com.facebook.drawee.view.SimpleDraweeView
+                                    android:id="@+id/drawee_view"
+                                    android:layout_width="150dp"
+                                    android:layout_height="150dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:padding="@dimen/default_padding_medium"
+                                    fresco:placeholderImage="@drawable/yotsugi"
+                                    fresco:placeholderImageScaleType="centerCrop"/>
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <!--Separator-->
+                        <include
+                            android:id="@+id/separator2"
+                            layout="@layout/divider"/>
+
+                        <!--Footer section-->
+                        <LinearLayout
+                            style="@style/CardViewAction"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+
+                            <Button
+                                android:id="@+id/button_delete"
+                                style="?android:attr/borderlessButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="DELETE"
+                                android:textColor="@color/gray_dark"
+                                android:textSize="16sp"
+                                />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="end"
+                                android:orientation="horizontal">
+
+                                <Button
+                                    android:id="@+id/button_cancel"
+                                    style="?android:attr/borderlessButtonStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="CANCEL"
+                                    android:textColor="@color/gray_dark"
+                                    android:textSize="16sp"
+                                    />
+
+                                <Button
+                                    android:id="@+id/button_done"
+                                    style="?android:attr/borderlessButtonStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="DONE"
+                                    android:textColor="?attr/colorAccent"
+                                    android:textSize="16sp"
+                                    />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.desu.experiments.view.widget.LockableScrollView>
+            </android.support.v7.widget.CardView>
+
+        </com.desu.experiments.view.widget.OverScrollView>
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

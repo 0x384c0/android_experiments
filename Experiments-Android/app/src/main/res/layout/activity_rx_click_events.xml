@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+
+        <variable
+            name="RxClickEventsUser"
+            type="com.desu.experiments.view.activity.rx.RxClickEventsUser" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@{RxClickEventsUser.text}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <Button
+                android:id="@+id/btn_start_operation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="tap me"
+                android:textSize="16dp" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{RxClickEventsUser.onClickListener.onClick}"
+                android:text="Flat Map"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <com.desu.experiments.view.widget.logView.LogView
+            android:id="@+id/log_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</layout>

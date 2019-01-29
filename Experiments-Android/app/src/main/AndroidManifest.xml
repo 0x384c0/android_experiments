@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.desu.experiments">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".Application"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="Database.db" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="1" />
+        <!-- android:screenOrientation="portrait" -->
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.activity.rx.RxInputTextDebounce"
+            android:label="@string/title_activity_input_text_debounce" />
+        <activity
+            android:name=".view.activity.toolbars.ToolBarFaded"
+            android:label="@string/title_activity_faded_acion_bar" />
+        <activity
+            android:name=".view.activity.material.CoordinatorLay"
+            android:label="@string/title_activity_coordinator_layout" />
+        <activity
+            android:name=".view.activity.material.sharedElements.ActivitySharedA"
+            android:label="ActivitySharedA" />
+        <activity
+            android:name=".view.activity.material.sharedElements.ActivitySharedB"
+            android:label="ActivitySharedB"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".view.activity.material.content_transition.ActivityA"
+            android:label="ActivityA" />
+        <activity
+            android:name=".view.activity.material.content_transition.ActivityB"
+            android:label="ActivityA" />
+        <activity
+            android:name=".view.activity.toolbars.ToolBarCollapsingIcon"
+            android:label="@string/title_activity_main2" />
+        <activity
+            android:name=".view.activity.toolbars.ToolBarFadedLollipop"
+            android:label="@string/title_activity_animate_toolbar"
+            android:theme="@style/AppTheme.Detail" />
+        <activity
+            android:name=".view.activity.rx.RxSchedulers"
+            android:label="@string/title_activity_rx_schedulers" />
+        <activity
+            android:name=".view.activity.rx.RxClickEvents"
+            android:label="@string/title_activity_rx_click_events" />
+        <activity
+            android:name=".view.activity.rx.RxRetrofit"
+            android:label="@string/title_activity_rx_retrofit" />
+        <activity
+            android:name=".view.activity.rx.RxAsyncTask"
+            android:label="@string/title_activity_rx_asynctask" />
+        <activity
+            android:name=".view.activity.rx.RxOnTouchIndicator"
+            android:label="@string/title_activity_rx_on_touch_indicator" />
+        <activity
+            android:name=".view.activity.rx.RxFormValidation"
+            android:label="@string/title_activity_rx_form_validation" />
+        <activity
+            android:name=".view.activity.material.bookmarks_edit.EditBookmarkList"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_bookmarks_edit"
+            android:theme="@style/AppTheme.YotsugiTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.activity.material.bookmarks_edit.EditBookmarkActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_edit_bookmark"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".view.activity.others.LambdaExpressions"
+            android:label="@string/title_activity_lambda_expressions"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.activity.others.ServiceActivity"
+            android:launchMode="singleTask" />
+
+        <service android:name=".service.TestService" />
+
+        <activity
+            android:name=".view.activity.material.ConstraintsActivity"
+            android:label="@string/title_activity_constraints"
+            android:theme="@style/AppTheme"></activity>
+    </application>
+
+</manifest>

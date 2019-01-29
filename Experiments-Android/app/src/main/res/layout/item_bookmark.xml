@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="ItemBookmark"
+            type="com.desu.experiments.viewModel.item.ItemBookmarkViewModel"/>
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view1"
+        style="@style/MyCardView"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:transitionName="@string/trans_cardview"
+        card_view:cardCornerRadius="3dp"
+        card_view:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--Header section-->
+            <include
+                layout="@layout/item_bookmark_header"
+                bind:ItemBookmark="@{ItemBookmark}"/>
+
+            <!--Detail section-->
+            <LinearLayout
+                android:id="@+id/linearlayout_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/item_bookmark_detail_section"
+                    bind:ItemBookmark="@{ItemBookmark}"/>
+
+                <!--Footer section-->
+                <LinearLayout
+                    style="@style/CardViewSection"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/default_padding_medium"
+                    android:layout_marginRight="@dimen/default_padding_medium"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/imageview_delete"
+                        style="@style/CardViewActionImage"
+                        android:contentDescription="delete"
+                        android:src="@drawable/ic_delete_24dp"/>
+
+                    <ImageButton
+                        android:id="@+id/imageview_edit"
+                        style="@style/CardViewActionImage"
+                        android:contentDescription="edit"
+                        android:src="@drawable/ic_mode_edit_24dp"/>
+
+                    <ImageButton
+                        android:id="@+id/imageview_share"
+                        style="@style/CardViewActionImage"
+                        android:contentDescription="share"
+                        android:src="@drawable/ic_share_24dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</layout>

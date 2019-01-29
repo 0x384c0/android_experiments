@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="ItemBookmark"
+            type="com.desu.experiments.viewModel.item.ItemBookmarkViewModel"/>
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
+
+        <LinearLayout
+            style="@style/CardViewSection"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+
+            <TextView
+                android:id="@+id/textview_date_saved"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="@{ItemBookmark.textViewDateSaved}"
+                android:textSize="@dimen/text_small"
+                android:textStyle="italic"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Full URL"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text_small"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/textview_full_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/default_padding_medium"
+                android:text="@{ItemBookmark.textViewFullUrl}"
+                android:textSize="@dimen/text_small"/>
+        </LinearLayout>
+
+        <LinearLayout style="@style/CardViewSeparator"/>
+
+    </LinearLayout>
+</layout>
