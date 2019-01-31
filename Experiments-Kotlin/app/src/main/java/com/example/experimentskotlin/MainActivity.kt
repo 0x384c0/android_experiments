@@ -5,17 +5,24 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.example.corenetwork.CoreNetwork
+import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     //UI Actions
-    fun onButtonClick(@Suppress("UNUSED_PARAMETER") view: View){
+    fun onTestQueryClick(@Suppress("UNUSED_PARAMETER") view: View){
         val coreNetwork = CoreNetwork()
         Log.w(localClassName,coreNetwork.test())
         refresh()
+    }
+    fun onLoadImageQueryClick(@Suppress("UNUSED_PARAMETER") view: View){
+        Picasso.get()
+            .load("https://vignette.wikia.nocookie.net/kancolle/images/9/96/Tashkent_Card.png")
+            .into(loadedImageView)
     }
 
 
