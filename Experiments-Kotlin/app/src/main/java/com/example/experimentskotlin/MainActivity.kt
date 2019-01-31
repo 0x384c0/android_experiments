@@ -1,5 +1,6 @@
 package com.example.experimentskotlin
 
+
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,10 +13,12 @@ import io.reactivex.schedulers.Schedulers
 class MainActivity : AppCompatActivity() {
 
     //UI Actions
-    fun onButtonClick(@Suppress("UNUSED_PARAMETER") view: View){
+    fun onTestQueryClick(@Suppress("UNUSED_PARAMETER") view: View){
         val coreNetwork = CoreNetwork()
         Log.w(localClassName,coreNetwork.test())
         refresh()
+    }
+    fun onLoadImageQueryClick(@Suppress("UNUSED_PARAMETER") view: View){
     }
 
 
