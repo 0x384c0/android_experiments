@@ -1,10 +1,12 @@
 package com.example.experimentskotlin
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.example.corenetwork.CoreNetwork
+import com.example.experimentskotlin.navigaton.NavHostActivity
 import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -23,6 +25,10 @@ class MainActivity : AppCompatActivity() {
         Picasso.get()
             .load("https://vignette.wikia.nocookie.net/kancolle/images/9/96/Tashkent_Card.png")
             .into(loadedImageView)
+    }
+    fun openNavigationClick(@Suppress("UNUSED_PARAMETER") view: View) {
+        val intent = Intent(this, NavHostActivity::class.java)
+        startActivity(intent)
     }
 
 
