@@ -3,7 +3,7 @@ apply plugin: 'kotlin'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.kotlin_version"
 
     compile "com.squareup.retrofit2:retrofit:2.5.0"
     compile "com.squareup.retrofit2:adapter-rxjava2:2.5.0"

@@ -1,8 +1,7 @@
 package com.example.experimentskotlin.navigaton
 
-import android.net.Uri
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.experimentskotlin.R
 
 class NavHostActivity : AppCompatActivity() {
