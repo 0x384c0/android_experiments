@@ -3,11 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/mainFragment2">
-
+    app:startDestination="@id/coreNetworkTestFragment">
     <fragment
-        android:id="@+id/mainFragment2"
-        android:name="com.example.experimentskotlin.navigaton.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        android:id="@+id/coreNetworkTestFragment"
+        android:name="com.example.experimentskotlin.coreNetowrkTest.CoreNetworkTestFragment"
+        android:label="CoreNetworkTestFragment" />
+    <include app:graph="@navigation/nav_graph" />
 </navigation>
