@@ -2,19 +2,13 @@ package com.example.corenetwork
 
 import com.example.corenetwork.model.WikiaQueryResponse
 import io.reactivex.Observable
-import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-import okhttp3.OkHttpClient
-import okhttp3.Response
-import okhttp3.logging.HttpLoggingInterceptor
-import java.io.IOException
-import sun.util.logging.LoggingSupport.setLevel
-
-
 
 
 interface WikiaApiInterface {
