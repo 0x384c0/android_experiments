@@ -6,7 +6,7 @@
     app:startDestination="@id/coreNetworkTestFragment">
     <fragment
         android:id="@+id/coreNetworkTestFragment"
-        android:name="com.example.experimentskotlin.coreNetowrkTest.CoreNetworkTestFragment"
+        android:name="com.example.experimentskotlin.fragment.CoreNetworkTestFragment"
         android:label="CoreNetworkTestFragment" />
     <include app:graph="@navigation/nav_graph" />
 </navigation>

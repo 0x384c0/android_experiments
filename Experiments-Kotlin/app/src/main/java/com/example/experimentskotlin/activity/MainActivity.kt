@@ -1,15 +1,14 @@
-package com.example.experimentskotlin
+package com.example.experimentskotlin.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.navigation.NavigationView
+import com.example.experimentskotlin.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -27,7 +26,10 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         val drawerLayout : DrawerLayout? = drawer_layout
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.coreNetworkTestFragment, R.id.nav_graph),
+            setOf(
+                R.id.coreNetworkTestFragment,
+                R.id.nav_graph
+            ),
             drawerLayout)
 
         setupActionBarWithNavController(navController, appBarConfiguration)

@@ -1,4 +1,4 @@
-package com.example.experimentskotlin.coreNetowrkTest
+package com.example.experimentskotlin.fragment
 
 
 import android.os.Bundle
