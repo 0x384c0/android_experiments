@@ -18,10 +18,10 @@ import retrofit2.http.Query
 interface Api {
 
     @GET("/api/v1/Articles/List")
-    fun getArticlesList(): Observable<ArticlesListResponse>
+    fun getArticlesList(@Query("offset") offset: String? = null): Observable<ArticlesListResponse>
 
     @GET("api/v1/Articles/AsSimpleJson")
-    fun getArticlesDetails(@Query("id") id: Int):Observable<ArticlesDetailsResponse>
+    fun getArticlesDetails(@Query("id") id: Int): Observable<ArticlesDetailsResponse>
 
 
     @GET("api.php")

@@ -9,6 +9,7 @@ import com.example.corenetwork.model.ErrorResponse
 import com.example.corenetwork.model.articles.ArticleItem
 import com.example.experimentskotlin.R
 import com.example.experimentskotlin.baseclasses.BaseMVVMFragment
+import com.example.experimentskotlin.util.InfinityScrollManager
 import com.example.experimentskotlin.util.adapters.SingleLayoutAdapter
 import com.example.experimentskotlin.util.extensions.observe
 import kotlinx.android.synthetic.main.item_article.view.*
@@ -34,6 +35,7 @@ class ArticlesFragment : BaseMVVMFragment<ArticlesViewModel>() {
         viewModel.articles.observe(this) {
             adapter.data = it
         }
+        infinityScrollManager = InfinityScrollManager(this, viewModel)
     }
     //endregion
 
@@ -68,6 +70,7 @@ class ArticlesFragment : BaseMVVMFragment<ArticlesViewModel>() {
 
     override fun hideLoading() {
         swipeRefreshLayout.isRefreshing = false
+        infinityScrollManager.hideLoading()
     }
 
     override fun showAlert(e: Throwable) {
@@ -78,6 +81,11 @@ class ArticlesFragment : BaseMVVMFragment<ArticlesViewModel>() {
         else
             throw e
     }
+    //endregion
+
+
+    //region Managers
+    private lateinit var infinityScrollManager: InfinityScrollManager
     //endregion
 }
 
