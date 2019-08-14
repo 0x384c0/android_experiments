@@ -5,7 +5,7 @@ class CoreNetwork{
         return "CoreNetwork test called"
     }
     val wikiApi by lazy {
-        WikiaApiInterface.create()
+        Api.getInstance()
     }
 }
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <activity
+        android:id="@+id/navigationTargetActivity"
+        android:name="com.example.experimentskotlin.navigaton.NavigationTargetActivity"
+        android:label="activity_navigation_target"
+        tools:layout="@layout/activity_navigation_target" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.experimentskotlin.navigaton.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_navigationTargetActivity"
+            app:destination="@id/navigationTargetActivity" />
+        <action
+            android:id="@+id/action_mainFragment_to_navigationTargetFragment"
+            app:destination="@id/navigationTargetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigationTargetFragment"
+        android:name="com.example.experimentskotlin.navigaton.NavigationTargetFragment"
+        android:label="fragment_navigation_target"
+        tools:layout="@layout/fragment_navigation_target" />
+</navigation>
