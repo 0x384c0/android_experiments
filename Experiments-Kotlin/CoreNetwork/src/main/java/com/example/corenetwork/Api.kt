@@ -1,6 +1,7 @@
 package com.example.corenetwork
 
 import com.example.corenetwork.model.WikiaQueryResponse
+import com.example.corenetwork.model.articles.ArticlesDetailsResponse
 import com.example.corenetwork.model.articles.ArticlesListResponse
 import com.example.corenetwork.model.authsettings.UserInfo
 import io.reactivex.Observable
@@ -18,6 +19,9 @@ interface Api {
 
     @GET("/api/v1/Articles/List")
     fun getArticlesList(): Observable<ArticlesListResponse>
+
+    @GET("api/v1/Articles/AsSimpleJson")
+    fun getArticlesDetails(@Query("id") id: Int):Observable<ArticlesDetailsResponse>
 
 
     @GET("api.php")

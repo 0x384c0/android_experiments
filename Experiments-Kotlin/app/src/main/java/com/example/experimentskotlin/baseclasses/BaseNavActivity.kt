@@ -6,8 +6,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.experimentskotlin.R
-import com.example.experimentskotlin.util.localize.NavDestinationLocalizer
 import kotlinx.android.synthetic.main.activity_base_nav.*
 
 
@@ -57,32 +57,30 @@ abstract class BaseNavActivity : BaseActivity(), NavActivityWithToolbar {
     //endregion
 
     //region Others
-    private lateinit var navDestinationLocalizer:NavDestinationLocalizer
     private fun setupNavigation() {
-        if (!::navDestinationLocalizer.isInitialized) {
-            navDestinationLocalizer = NavDestinationLocalizer(this,supportActionBar)
-            navController.addOnDestinationChangedListener(navDestinationLocalizer)
-        }
+        setupActionBarWithNavController(navController)
     }
 
-    internal fun getCurrentFragment():Fragment?{
+    internal fun getCurrentFragment(): Fragment? {
         return navHostFragment.childFragmentManager.fragments.getOrNull(0)
     }
     //endregion
 
     //region for overriding
     open val useCustomToolbar = false
+
     abstract fun getNavigationGraphId(): Int
     //endregion
 
 
     //region Custom Toolbar
-    override fun hideToolbar(){
+    override fun hideToolbar() {
         if (useCustomToolbar) {
             customToolbar.visibility = View.GONE
         }
     }
-    override fun showToolbar(){
+
+    override fun showToolbar() {
         if (useCustomToolbar) {
             customToolbar.visibility = View.VISIBLE
         }
@@ -91,7 +89,7 @@ abstract class BaseNavActivity : BaseActivity(), NavActivityWithToolbar {
 
 }
 
-interface NavActivityWithToolbar{
+interface NavActivityWithToolbar {
     fun hideToolbar()
     fun showToolbar()
 }

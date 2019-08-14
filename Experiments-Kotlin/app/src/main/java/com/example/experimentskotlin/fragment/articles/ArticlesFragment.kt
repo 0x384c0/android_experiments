@@ -3,6 +3,7 @@ package com.example.experimentskotlin.fragment.articles
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.corenetwork.model.ErrorResponse
 import com.example.corenetwork.model.articles.ArticleItem
@@ -30,23 +31,24 @@ class ArticlesFragment : BaseMVVMFragment<ArticlesViewModel>() {
     //region Data Binding
     override fun bindData() {
         super.bindData()
-        viewModel.articles.observe(this){
+        viewModel.articles.observe(this) {
             adapter.data = it
         }
     }
     //endregion
 
     //region RecyclerView
-    private lateinit var adapter:SingleLayoutAdapter<ArticleItem>
+    private lateinit var adapter: SingleLayoutAdapter<ArticleItem>
+
     private fun setupRecyclerView() {
         adapter = SingleLayoutAdapter(
             itemLayoutId = R.layout.item_article,
-            bindViewHandler = {view, data ->
+            bindViewHandler = { view, data ->
                 view.titleTextView.text = data.title
                 view.urlTextView.text = data.url
             },
-            onClickHandler = {position, data ->
-
+            onClickHandler = { _, data ->
+                findNavController().navigate(ArticlesFragmentDirections.next(data.title, data))
             }
         )
         recyclerView.layoutManager = LinearLayoutManager(context)

@@ -67,3 +67,14 @@ abstract class BaseLocalizationActivity : AppCompatActivity() {
 //    notificationCompositeDisposable = CompositeDisposable()
 //    subscribeToEvents(notificationCompositeDisposable!!)
 //}
+
+
+
+//// in BaseNavActivity
+//private lateinit var navDestinationLocalizer: NavDestinationLocalizer
+//private fun setupNavigation() {
+//    if (!::navDestinationLocalizer.isInitialized) {
+//        navDestinationLocalizer = NavDestinationLocalizer(this,supportActionBar)
+//        navController.addOnDestinationChangedListener(navDestinationLocalizer)
+//    }
+//}
