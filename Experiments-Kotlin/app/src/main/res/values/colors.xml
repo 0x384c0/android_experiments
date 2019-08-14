@@ -5,6 +5,11 @@
     <color name="colorAccent">#D81B60</color>
 
 
+    <color name="grayLineColor">#F0F1F3</color>
+    <color name="grayTextColor">#848D94</color>
+    <color name="darkGrayTextColor">#384148</color>
+    <color name="blackTextColor">#1E272E</color>
+
     <color name="red">#FF0000</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>

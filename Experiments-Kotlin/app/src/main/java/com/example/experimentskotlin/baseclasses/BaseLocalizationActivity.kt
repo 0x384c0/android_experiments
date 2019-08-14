@@ -9,7 +9,7 @@ import io.reactivex.disposables.CompositeDisposable
 
 
 /**
- * Класс [Activity] с NavController для выбора языка
+ * Класс [Activity] с NavController для переключения языка на лету
  *
  * все его методы описаны в документации Android к Activity
  * [Activity](https://developer.android.com/reference/android/app/Activity)
@@ -54,3 +54,16 @@ abstract class BaseLocalizationActivity : AppCompatActivity() {
         super.attachBaseContext(localeManager.wrapActivityContext(newBase))
     }
 }
+
+//LocaleManager should be initilaized
+
+//open fun subscribeToEvents(eventsDisposable: CompositeDisposable) {
+//    subscribeLocalizationEvents(notificationCompositeDisposable!!)
+//}
+
+//
+//private fun subscribeToEvents() {
+//    notificationCompositeDisposable?.dispose()
+//    notificationCompositeDisposable = CompositeDisposable()
+//    subscribeToEvents(notificationCompositeDisposable!!)
+//}

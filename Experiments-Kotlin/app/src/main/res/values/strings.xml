@@ -3,8 +3,6 @@
     <string name="test_query">Test Query</string>
     <string name="loaded_image">Loaded Image</string>
     <string name="load_image">Load Image</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="close">close</string>
     <string name="press_back_again_to_exit">press_back_again_to_exit</string>
     <string name="location_permission_text">location_permission_text</string>
@@ -14,4 +12,8 @@
     <string name="kilometers_dot">kilometers_dot</string>
     <string name="cancel">cancel</string>
     <string name="blank_string"> </string>
+    <string name="null_string">NULL</string>
+    <string name="articles">Articles</string>
+    <string name="core_network_test">Core Network test</string>
+    <string name="wikia_articles">Wikia articles</string>
 </resources>

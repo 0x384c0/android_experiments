@@ -43,7 +43,7 @@ class PopBackStackManager {
      * запланировать удаление ненужных фрагментов из стека вплоть до главного фрагмента
      */
     fun popToMain(afterFragments: List<KClass<out Fragment>>) {
-        createPopupOption(afterFragments, false, R.id.mainFragment)
+        createPopupOption(afterFragments, false, R.id.navHostFragment)
     }
 
     /**

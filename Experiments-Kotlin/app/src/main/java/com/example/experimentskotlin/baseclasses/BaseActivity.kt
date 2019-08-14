@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import com.example.corenetwork.Api
@@ -27,7 +28,7 @@ import io.reactivex.disposables.CompositeDisposable
  *
  * отвечает за алерты, анимацию загрузки, навигацию
  */
-abstract class BaseActivity : BaseLocalizationActivity() {
+abstract class BaseActivity : AppCompatActivity() {
     //region LifeCycle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -142,11 +143,6 @@ abstract class BaseActivity : BaseLocalizationActivity() {
     private fun subscribeToEvents() {
         notificationCompositeDisposable?.dispose()
         notificationCompositeDisposable = CompositeDisposable()
-        subscribeToEvents(notificationCompositeDisposable!!)
-    }
-
-    open fun subscribeToEvents(eventsDisposable: CompositeDisposable) {
-        subscribeLocalizationEvents(notificationCompositeDisposable!!)
     }
 
     private fun unSubscribeFromEvents() {

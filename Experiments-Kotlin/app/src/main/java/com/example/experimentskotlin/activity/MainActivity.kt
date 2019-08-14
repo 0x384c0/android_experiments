@@ -1,43 +1,12 @@
 package com.example.experimentskotlin.activity
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.experimentskotlin.R
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.experimentskotlin.baseclasses.BaseNavActivity
 
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var appBarConfiguration : AppBarConfiguration
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-
-        val host = navHostFragment as NavHostFragment
-        val navController = host.navController
-
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        val drawerLayout : DrawerLayout? = drawer_layout
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.coreNetworkTestFragment,
-                R.id.nav_graph
-            ),
-            drawerLayout)
-
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        setupNavigationMenu(navController)
+class MainActivity : BaseNavActivity() {
+    //region LifeCycle
+    override fun getNavigationGraphId(): Int {
+        return R.navigation.main_navigation
     }
-
-    private fun setupNavigationMenu(navController: NavController) {
-        nav_view?.setupWithNavController(navController)
-    }
+    //endregion
 }

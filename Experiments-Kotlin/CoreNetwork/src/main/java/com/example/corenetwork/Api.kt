@@ -1,6 +1,7 @@
 package com.example.corenetwork
 
 import com.example.corenetwork.model.WikiaQueryResponse
+import com.example.corenetwork.model.articles.ArticlesListResponse
 import com.example.corenetwork.model.authsettings.UserInfo
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
@@ -14,6 +15,11 @@ import retrofit2.http.Query
 
 
 interface Api {
+
+    @GET("/api/v1/Articles/List")
+    fun getArticlesList(): Observable<ArticlesListResponse>
+
+
     @GET("api.php")
     fun query(
         @Query("action") action: String,
@@ -23,22 +29,22 @@ interface Api {
 
 
     @GET("api.php/dictionaries")
-    fun getDictionaries(localeSlug:String): Observable<ResourceDict>
+    fun getDictionaries(localeSlug: String): Observable<ResourceDict>
 
     @POST("api.php/login")
     fun login(
-        name: String,
-        encryptedPassword: String
+        @Query("name") name: String,
+        @Query("encryptedPassword") encryptedPassword: String
     ): Observable<UserInfo>
 
     @POST("api.php/changePass")
     fun changePass(
-        oldPasswordEncrypted: String,
-        newPasswordEncrypted: String
+        @Query("oldPasswordEncrypted") oldPasswordEncrypted: String,
+        @Query("newPasswordEncrypted") newPasswordEncrypted: String
     ): Observable<UserInfo>
 
     @POST("api.php/refreshToken")
-    fun refreshToken(refreshToken: String): Observable<UserInfo>
+    fun refreshToken(@Query("refreshToken") refreshToken: String): Observable<UserInfo>
 
     companion object {
         private lateinit var instance: Api
@@ -65,7 +71,7 @@ interface Api {
             return retrofit.create(Api::class.java)
         }
 
-        fun getClientBuilderWithAuth():OkHttpClient.Builder{
+        fun getClientBuilderWithAuth(): OkHttpClient.Builder {
 
             val logging = HttpLoggingInterceptor()
             logging.level = HttpLoggingInterceptor.Level.BODY
