@@ -15,4 +15,16 @@ data class ArticleItem(
     val title: String,
     val url: String,
     val ns: Int
-) : Parcelable
+) : Parcelable{
+    override fun equals(other: Any?): Boolean {
+        return (other as? ArticleItem)?.id == id
+    }
+
+    override fun hashCode(): Int {
+        var result = id
+        result = 31 * result + title.hashCode()
+        result = 31 * result + url.hashCode()
+        result = 31 * result + ns
+        return result
+    }
+}

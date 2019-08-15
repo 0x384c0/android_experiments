@@ -44,6 +44,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:" + rootProject.lifecycle_version
     implementation 'androidx.constraintlayout:constraintlayout:' + rootProject.constraintLayoutVersion
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
+    implementation "androidx.paging:paging-runtime:" + rootProject.paging_version
 
     // Navigation
     implementation 'android.arch.navigation:navigation-fragment-ktx:' + rootProject.navigationVersion
@@ -63,4 +64,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
     implementation project(":CoreNetwork")
     implementation 'android.arch.navigation:navigation-fragment:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }

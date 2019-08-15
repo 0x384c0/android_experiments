@@ -20,5 +20,8 @@ class MainFragment : BaseFragment() {
         articlesButton.setOnClickListener {
             findNavController().navigate(R.id.articlesFragment)
         }
+        pagingLibraryButton.setOnClickListener {
+            findNavController().navigate(R.id.pagingFragment)
+        }
     }
 }

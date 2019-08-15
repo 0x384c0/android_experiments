@@ -28,6 +28,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/pagingFragment"
+            app:destination="@id/pagingFragment"/>
     </fragment>
     <fragment
         android:id="@+id/articlesFragment"
@@ -54,4 +57,9 @@
             android:name="articleItem"
             app:argType="com.example.corenetwork.model.articles.ArticleItem" />
     </fragment>
+    <fragment
+        android:id="@+id/pagingFragment"
+        android:name="com.example.experimentskotlin.fragment.paging.PagingFragment"
+        android:label="fragment_paging"
+        tools:layout="@layout/fragment_paging"/>
 </navigation>
