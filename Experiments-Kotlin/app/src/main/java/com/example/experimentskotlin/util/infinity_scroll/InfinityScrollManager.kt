@@ -1,4 +1,4 @@
-package com.example.experimentskotlin.util
+package com.example.experimentskotlin.util.infinity_scroll
 
 import android.os.Handler
 import android.view.View

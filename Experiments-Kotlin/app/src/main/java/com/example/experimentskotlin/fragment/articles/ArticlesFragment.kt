@@ -9,9 +9,9 @@ import com.example.corenetwork.model.ErrorResponse
 import com.example.corenetwork.model.articles.ArticleItem
 import com.example.experimentskotlin.R
 import com.example.experimentskotlin.baseclasses.BaseMVVMFragment
-import com.example.experimentskotlin.util.InfinityScrollManager
 import com.example.experimentskotlin.util.adapters.SingleLayoutAdapter
 import com.example.experimentskotlin.util.extensions.observe
+import com.example.experimentskotlin.util.infinity_scroll.InfinityScrollManager
 import kotlinx.android.synthetic.main.item_article.view.*
 import kotlinx.android.synthetic.main.view_recycler_view_infinity_scroll.*
 
@@ -32,10 +32,10 @@ class ArticlesFragment : BaseMVVMFragment<ArticlesViewModel>() {
     //region Data Binding
     override fun bindData() {
         super.bindData()
-        viewModel.articles.observe(this) {
+        viewModel.recyclerViewDataBinding.observe(this) {
             adapter.data = it
         }
-        infinityScrollManager = InfinityScrollManager(this, viewModel)
+        infinityScrollManager = InfinityScrollManager(this, viewModel.paginationManager)
     }
     //endregion
 
@@ -50,6 +50,7 @@ class ArticlesFragment : BaseMVVMFragment<ArticlesViewModel>() {
                 view.urlTextView.text = data.url
             },
             onClickHandler = { _, data ->
+                viewModel.paginationManager.reloadPageForItemAtNextOnResume(data)
                 findNavController().navigate(ArticlesFragmentDirections.next(data.title, data))
             }
         )
