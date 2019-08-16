@@ -12,7 +12,7 @@ data class ArticlesListResponse(
 @Parcelize
 data class ArticleItem(
     val id: Int,
-    val title: String,
+    var title: String,
     val url: String,
     val ns: Int
 ) : Parcelable{

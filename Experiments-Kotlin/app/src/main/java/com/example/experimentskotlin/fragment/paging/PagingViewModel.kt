@@ -14,12 +14,23 @@ class PagingViewModel : BaseViewModel() {
                 load = this::loadPage,
                 areItemsTheSame = { oldItem, newItem ->
                     oldItem.id == newItem.id
-                }
+                },
+                pageSize = 25
         )
     }
 
+    private var pagNum = 0
     private fun loadPage(page: String?, loaded: PageListLoadedCallback<String, ArticleItem>) {
         api.getArticlesList(page)
+                .map {
+                    var itemNum = 0
+                    it.items.forEach {
+                        it.title = "$pagNum:$itemNum ${it.title}"
+                        itemNum++
+                    }
+                    pagNum++
+                    it
+                }
                 .subscribeOnMain(
                         onNext = {
                             loaded(it.items, it.offset)

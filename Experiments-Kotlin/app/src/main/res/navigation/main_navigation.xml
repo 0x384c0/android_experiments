@@ -31,6 +31,9 @@
         <action
             android:id="@+id/pagingFragment"
             app:destination="@id/pagingFragment"/>
+        <action
+            android:id="@+id/pagingSectionedFragment"
+            app:destination="@id/pagingSectionedFragment"/>
     </fragment>
     <fragment
         android:id="@+id/articlesFragment"
@@ -62,4 +65,9 @@
         android:name="com.example.experimentskotlin.fragment.paging.PagingFragment"
         android:label="fragment_paging"
         tools:layout="@layout/fragment_paging"/>
+    <fragment
+        android:id="@+id/pagingSectionedFragment"
+        android:name="com.example.experimentskotlin.fragment.paging.PagingSectionedFragment"
+        android:label="pagingSectionedFragment"
+        tools:layout="@layout/fragment_paging_sectioned"/>
 </navigation>

@@ -15,13 +15,17 @@ class MainFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         coreNetworkTestFragment.setOnClickListener {
-            findNavController().navigate(R.id.coreNetworkTestFragment)
+            findNavController().navigate(MainFragmentDirections.coreNetworkTestFragment())
         }
         articlesButton.setOnClickListener {
-            findNavController().navigate(R.id.articlesFragment)
+            findNavController().navigate(MainFragmentDirections.articlesFragment())
         }
         pagingLibraryButton.setOnClickListener {
-            findNavController().navigate(R.id.pagingFragment)
+            findNavController().navigate(MainFragmentDirections.pagingFragment())
         }
+        pagingLibrarySectionedButton.setOnClickListener {
+            findNavController().navigate(MainFragmentDirections.pagingSectionedFragment())
+        }
+
     }
 }

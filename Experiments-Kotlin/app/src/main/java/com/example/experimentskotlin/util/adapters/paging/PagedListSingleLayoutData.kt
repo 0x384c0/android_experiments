@@ -13,12 +13,13 @@ typealias PageListLoadCallback<P, T> = (page: P?, loaded: PageListLoadedCallback
 
 class PagedListSingleLayoutData<P, T>(
         load: PageListLoadCallback<P, T>,
-        areItemsTheSame: (oldItem: T, newItem: T) -> Boolean
+        areItemsTheSame: (oldItem: T, newItem: T) -> Boolean,
+        pageSize:Int
 ) {
 
     private val itemDataSource = PagedListDataSourceFactory(load)
     private val pagedListConfig = PagedList.Config.Builder()
-            .setPageSize(25)
+            .setPageSize(pageSize)
             .build()
     private val executor = Executors.newFixedThreadPool(5)
     val pagedLiveData = LivePagedListBuilder(itemDataSource, pagedListConfig)

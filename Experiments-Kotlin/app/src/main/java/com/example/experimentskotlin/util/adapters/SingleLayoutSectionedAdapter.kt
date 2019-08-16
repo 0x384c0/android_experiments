@@ -24,11 +24,6 @@ open class SingleLayoutSectionedAdapter<T, S>(
             return _data
         }
 
-    data class SectionData<T, S>(
-        val itemsData: List<T>,
-        val data: S
-    )
-
     private fun reloadAllSections() {
         removeAllSections()
         for (d in data) {
@@ -147,4 +142,31 @@ open class SingleLayoutSectionedAdapter<T, S>(
         }
     }
     //endregion
+}
+
+
+@Suppress("EqualsOrHashCode")
+data class SectionData<T, S>(
+        val itemsData: List<T>,
+        val data: S
+) {
+    override fun equals(other: Any?): Boolean {
+        try {
+            @Suppress("UNCHECKED_CAST")
+            val otherSection = other as SectionData<T, S>
+            val sameItemsCount = itemsData.count() == otherSection.itemsData.count()
+            if (sameItemsCount) {
+                var itemsEquals = true
+                itemsData.forEachIndexed { i, item ->
+                    if (item != otherSection.itemsData[i]) {
+                        itemsEquals = false
+                        return@forEachIndexed
+                    }
+                }
+                return itemsEquals
+            }
+        } catch (e: Exception) {
+        }
+        return false
+    }
 }
