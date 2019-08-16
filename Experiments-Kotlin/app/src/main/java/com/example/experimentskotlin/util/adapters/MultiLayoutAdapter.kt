@@ -13,15 +13,15 @@ import androidx.recyclerview.widget.RecyclerView
  */
 class MultiLayoutAdapter(
     context:Context,
-    itemViewHolderFactories: List<((View) -> BaseItemViewHolder<Any>)>
-) : RecyclerView.Adapter<MultiLayoutAdapter.BaseItemViewHolder<Any>>() {
+    itemViewHolderFactories: List<((View) -> BaseMultiLayoutItemViewHolder<Any>)>
+) : RecyclerView.Adapter<MultiLayoutAdapter.BaseMultiLayoutItemViewHolder<Any>>() {
 
     //region Init
-    private val factoryMap:Map<Int,((View) -> BaseItemViewHolder<Any>)>
+    private val factoryMap:Map<Int,((View) -> BaseMultiLayoutItemViewHolder<Any>)>
     private val typesMap:Map<Class<out Any>,Int>
     private val layoutIdMap:Map<Int,Int>
     init {
-        val factoryMap = mutableMapOf<Int,((View) -> BaseItemViewHolder<Any>)>()
+        val factoryMap = mutableMapOf<Int,((View) -> BaseMultiLayoutItemViewHolder<Any>)>()
         val typesMap = mutableMapOf<Class<Any>,Int>()
         val layoutIdMap = mutableMapOf<Int,Int>()
         val dummyView = View(context)
@@ -52,7 +52,7 @@ class MultiLayoutAdapter(
         return typesMap.getValue(dataClass)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseItemViewHolder<Any> {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseMultiLayoutItemViewHolder<Any> {
         val view = LayoutInflater.from(parent.context).inflate(layoutIdMap.getValue(viewType), parent, false)
         val factory = factoryMap.getValue(viewType)
         return factory(view)
@@ -62,12 +62,12 @@ class MultiLayoutAdapter(
         return _data.count()
     }
 
-    override fun onBindViewHolder(holder: BaseItemViewHolder<Any>, position: Int) {
+    override fun onBindViewHolder(holder: BaseMultiLayoutItemViewHolder<Any>, position: Int) {
         holder.setup(_data[position])
     }
     //endregion
 
-    abstract class BaseItemViewHolder<T>(view: View) : SingleLayoutAdapter.BaseItemViewHolder<T>(view) {
+    abstract class BaseMultiLayoutItemViewHolder<T>(view: View) : BaseItemViewHolder<T>(view) {
         abstract val dataClass:Class<T>
         abstract val itemLayoutId:Int
     }

@@ -20,6 +20,7 @@ class InfinityScrollManager(private val fragment: Fragment, private val viewMode
     init {
         fragment.recyclerView.addOnScrollListener(object : InfiniteScrollListener(
             Constants.PAGE_SIZE,
+                10,
             fragment.recyclerView.layoutManager as LinearLayoutManager
         ) {
             override fun onScrolledToEnd(firstVisibleItemPosition: Int) {

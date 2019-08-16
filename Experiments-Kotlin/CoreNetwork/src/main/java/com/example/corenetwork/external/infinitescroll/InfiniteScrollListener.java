@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public abstract class InfiniteScrollListener extends RecyclerView.OnScrollListener {
     private final int maxItemsPerRequest;
+    private final int itemCountBeforeLoadMore;
     private final LinearLayoutManager layoutManager;
 
     /**
@@ -33,10 +34,12 @@ public abstract class InfiniteScrollListener extends RecyclerView.OnScrollListen
      * @param maxItemsPerRequest Max items to be loaded in a single request.
      * @param layoutManager      LinearLayoutManager created in the Activity.
      */
-    public InfiniteScrollListener(int maxItemsPerRequest, LinearLayoutManager layoutManager) {
+    public InfiniteScrollListener(int maxItemsPerRequest,int itemCountBeforeLoadMore, LinearLayoutManager layoutManager) {
         Preconditions.checkIfPositive(maxItemsPerRequest, "maxItemsPerRequest <= 0");
+        Preconditions.checkIfPositive(itemCountBeforeLoadMore, "itemCountBeforeLoadMore <= 0");
         Preconditions.checkNotNull(layoutManager, "layoutManager == null");
         this.maxItemsPerRequest = maxItemsPerRequest;
+        this.itemCountBeforeLoadMore = itemCountBeforeLoadMore;
         this.layoutManager = layoutManager;
     }
 
@@ -75,7 +78,6 @@ public abstract class InfiniteScrollListener extends RecyclerView.OnScrollListen
      * @return boolean Returns true if can load more items or false if not.
      */
     private boolean canLoadMoreItems() {
-        final int itemCountBeforeLoadMore = (int) ((double) maxItemsPerRequest * 0.25);
         final int visibleItemsCount = layoutManager.getChildCount();
         final int totalItemsCount = layoutManager.getItemCount();
         final int pastVisibleItemsCount = layoutManager.findFirstVisibleItemPosition();

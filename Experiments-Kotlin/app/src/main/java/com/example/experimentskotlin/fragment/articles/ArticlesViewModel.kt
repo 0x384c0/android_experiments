@@ -34,9 +34,9 @@ class ArticlesViewModel : BaseViewModel() {
     private var canLoadMore = true
     val paginationManager = PaginationManager<ArticleItem, String>(
             dataBinding = recyclerViewDataBinding,
-            getNextPage = { offset ?: "null"},
+            getNextPage = { if (it == null) "null" else offset ?: "null"},
             getDataObservable = { page ->
-                api.getArticlesList(if (page == page) null else page)
+                api.getArticlesList(if (page == "null") null else page)
                         .map {
                             canLoadMore = it.items.isNotEmpty()
                             offset = it.offset
