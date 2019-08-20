@@ -67,7 +67,15 @@
         tools:layout="@layout/fragment_paging"/>
     <fragment
         android:id="@+id/pagingSectionedFragment"
-        android:name="com.example.experimentskotlin.fragment.paging.PagingSectionedFragment"
+        android:name="com.example.experimentskotlin.fragment.paging.SectionedDiffUtilFragment"
         android:label="pagingSectionedFragment"
-        tools:layout="@layout/fragment_paging_sectioned"/>
+        tools:layout="@layout/fragment_paging_sectioned">
+        <action
+            android:id="@+id/next"
+            app:destination="@id/articlesDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
 </navigation>

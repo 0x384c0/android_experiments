@@ -23,7 +23,7 @@ class MainFragment : BaseFragment() {
         pagingLibraryButton.setOnClickListener {
             findNavController().navigate(MainFragmentDirections.pagingFragment())
         }
-        pagingLibrarySectionedButton.setOnClickListener {
+        pagingSectionedDiffUtil.setOnClickListener {
             findNavController().navigate(MainFragmentDirections.pagingSectionedFragment())
         }
 

@@ -18,5 +18,5 @@
     <string name="core_network_test">Core Network test</string>
     <string name="wikia_articles">Wikia articles</string>
     <string name="paging_library">Paging Library</string>
-    <string name="paging_library_sectioned">Paging Library Sectioned</string>
+    <string name="paging_sectioned_diff_util">Paging Sectioned DiffUtil</string>
 </resources>

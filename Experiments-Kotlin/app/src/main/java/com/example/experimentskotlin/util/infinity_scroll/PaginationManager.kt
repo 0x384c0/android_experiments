@@ -12,7 +12,7 @@ import io.reactivex.disposables.Disposable
  */
 class PaginationManager<T, P>(
     private val dataBinding: MutableLiveData<List<T>>,
-    private val getNextPage: (P?) -> P,
+    private val getNextPage: (P?) -> P, //next page or first page
     private val getDataObservable: (P) -> Observable<List<T>>,
     private val subscribe: (Observable<List<T>>) -> Disposable,
     private val showLoading: () -> Unit,

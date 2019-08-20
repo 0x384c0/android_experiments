@@ -30,10 +30,10 @@
             android:text="@string/paging_library" />
 
         <Button
-            android:id="@+id/pagingLibrarySectionedButton"
+            android:id="@+id/pagingSectionedDiffUtil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/paging_library_sectioned" />
+            android:text="@string/paging_sectioned_diff_util" />
     </LinearLayout>
 
 </FrameLayout>

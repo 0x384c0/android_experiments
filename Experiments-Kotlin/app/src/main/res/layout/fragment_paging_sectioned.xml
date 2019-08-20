@@ -3,11 +3,8 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".fragment.paging.PagingSectionedFragment">
+             tools:context=".fragment.paging.SectionedDiffUtilFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <include layout="@layout/view_recycler_view_infinity_scroll" />
 
 </FrameLayout>

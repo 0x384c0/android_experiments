@@ -19,9 +19,9 @@ class InfinityScrollManager(private val fragment: Fragment, private val viewMode
      */
     init {
         fragment.recyclerView.addOnScrollListener(object : InfiniteScrollListener(
-            Constants.PAGE_SIZE,
+                Constants.PAGE_SIZE,
                 10,
-            fragment.recyclerView.layoutManager as LinearLayoutManager
+                fragment.recyclerView.layoutManager as LinearLayoutManager
         ) {
             override fun onScrolledToEnd(firstVisibleItemPosition: Int) {
                 if (isCanLoadMore()) {
@@ -40,28 +40,41 @@ class InfinityScrollManager(private val fragment: Fragment, private val viewMode
 
     private var paddingWasNotSet = true
     private fun showLoading() {
+        if (::showHideLoadingCallback.isInitialized)
+            showHideLoadingHandler.removeCallbacks(showHideLoadingCallback)
         fragment.loadingMoreIndicator.visibility = View.VISIBLE
-        Handler().postDelayed({
+        showHideLoadingCallback = Runnable {
             try {
                 if (paddingWasNotSet) {
                     paddingWasNotSet = false
                     fragment.recyclerView.clipToPadding = false
 
                     fragment.recyclerView.setPadding(
-                        fragment.recyclerView.paddingLeft,
-                        fragment.recyclerView.paddingTop,
-                        fragment.recyclerView.paddingRight,
-                        fragment.loadingMoreIndicator.height
+                            fragment.recyclerView.paddingLeft,
+                            fragment.recyclerView.paddingTop,
+                            fragment.recyclerView.paddingRight,
+                            fragment.loadingMoreIndicator.height
                     )
                 }
             } catch (e: Exception) {
             }
         }
-            , 50)
+        Handler().postDelayed(showHideLoadingCallback, 50)
     }
 
+    private val showHideLoadingHandler = Handler()
+    private lateinit var showHideLoadingCallback: Runnable
+
     fun hideLoading() {
-        fragment.loadingMoreIndicator.visibility = View.GONE
+        if (::showHideLoadingCallback.isInitialized)
+            showHideLoadingHandler.removeCallbacks(showHideLoadingCallback)
+        showHideLoadingCallback = Runnable {
+            try {
+                fragment.loadingMoreIndicator.visibility = View.GONE
+            } catch (e: Exception) {
+            }
+        }
+        showHideLoadingHandler.postDelayed(showHideLoadingCallback, 50)
     }
 
     interface InfinityScrollViewModelInterface {
