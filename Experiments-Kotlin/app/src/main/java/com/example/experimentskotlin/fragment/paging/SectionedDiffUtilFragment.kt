@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.corenetwork.Constants
 import com.example.corenetwork.model.ErrorResponse
 import com.example.corenetwork.model.articles.ArticleItem
 import com.example.experimentskotlin.R
@@ -68,7 +69,7 @@ class SectionedDiffUtilFragment : BaseMVVMFragment<SectionedDiffUtilViewModel>()
                     items = it,
                     itemToSectionData = { (it.id / 10).toString() })
         }
-        infinityScrollManager = InfinityScrollManager(this, viewModel.paginationManager)
+        infinityScrollManager = InfinityScrollManager(this, viewModel.paginationManager, Constants.PAGE_SIZE)
     }
     //endregion
 

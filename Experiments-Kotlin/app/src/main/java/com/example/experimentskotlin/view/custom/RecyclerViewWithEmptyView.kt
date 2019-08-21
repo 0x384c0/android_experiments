@@ -92,13 +92,40 @@ class RecyclerViewWithEmptyView : RecyclerView {
     }
     //endregion
 
+    /**
+     * Класс, наблюдающий за изменениями в Adapter и обновляющий фон для RecyclerView
+     */
     private class AdapterDataObserver(
-        private val adapter: () -> Adapter<*>?,
-        private val emptyView: () -> View?
+            private val adapter: () -> Adapter<*>?,
+            private val emptyView: () -> View?
     ) :
-        RecyclerView.AdapterDataObserver() {
-        var emptyViewIsVisible: ((Adapter<*>) -> Boolean)? = null
+            RecyclerView.AdapterDataObserver() {
         override fun onChanged() {
+            resetBgState()
+        }
+
+        override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
+            resetBgState()
+        }
+
+        override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+            resetBgState()
+        }
+
+        override fun onItemRangeChanged(positionStart: Int, itemCount: Int, payload: Any?) {
+            resetBgState()
+        }
+
+        override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
+            resetBgState()
+        }
+
+        override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+            resetBgState()
+        }
+
+        var emptyViewIsVisible: ((Adapter<*>) -> Boolean)? = null
+        private fun resetBgState(){
             val adapter = adapter()
             val emptyView = emptyView()
             val emptyViewIsVisible = emptyViewIsVisible

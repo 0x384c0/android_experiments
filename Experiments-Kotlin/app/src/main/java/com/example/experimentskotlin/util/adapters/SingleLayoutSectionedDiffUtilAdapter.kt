@@ -10,6 +10,11 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 
+/**
+ * Адаптер для отображения списков с секциями
+ *
+ * Использует DiffUtil для быстродействия
+ */
 class SingleLayoutSectionedDiffUtilAdapter<T, S>(
         private val itemId: Int,
         private val headerId: Int,
@@ -17,7 +22,8 @@ class SingleLayoutSectionedDiffUtilAdapter<T, S>(
         private val sectionViewHolderFactory: (View) -> SingleLayoutSectionedAdapter.BaseItemViewHolder<S>
 ) : RecyclerView.Adapter<SingleLayoutSectionedAdapter.BaseItemViewHolder<*>>() {
     //region Data logic
-    private var data = listOf<ItemOrSectionData<T, S>>()
+    var data = listOf<ItemOrSectionData<T, S>>()
+        private set
     //endregion
 
     //region Overrides
@@ -29,7 +35,10 @@ class SingleLayoutSectionedDiffUtilAdapter<T, S>(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SingleLayoutSectionedAdapter.BaseItemViewHolder<*> {
+    override fun onCreateViewHolder(
+            parent: ViewGroup,
+            viewType: Int
+    ): SingleLayoutSectionedAdapter.BaseItemViewHolder<*> {
         val layoutId = if (viewType == ITEM) itemId else headerId
         val view = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
         val viewHolderFactory = if (viewType == ITEM) itemViewHolderFactory else sectionViewHolderFactory
@@ -125,7 +134,8 @@ class SingleLayoutSectionedDiffUtilAdapter<T, S>(
 
     private fun calculateData(
             items: List<T>,
-            itemToSectionData: (T) -> S): Pair<List<ItemOrSectionData<T, S>>, DiffUtil.DiffResult> {
+            itemToSectionData: (T) -> S
+    ): Pair<List<ItemOrSectionData<T, S>>, DiffUtil.DiffResult> {
         val sectionsData = toItemOrSectionData(items, itemToSectionData)
         val callback = DiffUtilCallback(data, sectionsData)
         val diff = DiffUtil.calculateDiff(callback)

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.corenetwork.Constants
 import com.example.corenetwork.model.ErrorResponse
 import com.example.corenetwork.model.articles.ArticleItem
 import com.example.experimentskotlin.R
@@ -35,7 +36,7 @@ class ArticlesFragment : BaseMVVMFragment<ArticlesViewModel>() {
         viewModel.recyclerViewDataBinding.observe(this) {
             adapter.data = it
         }
-        infinityScrollManager = InfinityScrollManager(this, viewModel.paginationManager)
+        infinityScrollManager = InfinityScrollManager(this, viewModel.paginationManager, Constants.PAGE_SIZE)
     }
     //endregion
 
@@ -44,15 +45,15 @@ class ArticlesFragment : BaseMVVMFragment<ArticlesViewModel>() {
 
     private fun setupRecyclerView() {
         adapter = SingleLayoutAdapter(
-            itemLayoutId = R.layout.item_article,
-            bindViewHandler = { view, data ->
-                view.titleTextView.text = data.title
-                view.urlTextView.text = data.url
-            },
-            onClickHandler = { _, data ->
-                viewModel.paginationManager.reloadPageForItemAtNextOnResume(data)
-                findNavController().navigate(ArticlesFragmentDirections.next(data.title, data))
-            }
+                itemLayoutId = R.layout.item_article,
+                bindViewHandler = { view, data ->
+                    view.titleTextView.text = data.title
+                    view.urlTextView.text = data.url
+                },
+                onClickHandler = { _, data ->
+                    viewModel.paginationManager.reloadPageForItemAtNextOnResume(data)
+                    findNavController().navigate(ArticlesFragmentDirections.next(data.title, data))
+                }
         )
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
