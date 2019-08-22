@@ -51,7 +51,10 @@ class CustomFilledBoxTextInputEditText : TextInputEditText {
         }
     private val passwordToggleButton:View?
         get() {
-            return (parent as? View)?.findViewById(R.id.text_input_password_toggle)
+            return null
+//            return (parent as? View)?.findViewById(
+////            com.example.corenetwork.R.id.text_input_password_toggle
+//            )
         }
 
     private fun updateHintPosition(hasFocus: Boolean, hasText: Boolean) {

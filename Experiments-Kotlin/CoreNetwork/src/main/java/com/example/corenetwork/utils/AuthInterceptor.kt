@@ -13,7 +13,7 @@ class AuthInterceptor(private val authDataProvider:AuthDataProvider):Interceptor
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
         var skip = false
-        val path = request.url().url().path.toString()
+        val path = request.url.toUri().path.toString()
         exceptions.forEach { skip = skip || path.contains(it) }
         if (!skip) {
             val accessToken = authDataProvider.currentUser?.accessToken

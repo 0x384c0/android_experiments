@@ -11,7 +11,6 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "0.0.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
@@ -26,43 +25,40 @@ android {
     androidExtensions {
         experimental = true
     }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlinVersion"
     //noinspection GradleDependency
 
     //UI
-    implementation 'com.google.android.material:material:' + rootProject.materialVersion
-    implementation 'androidx.core:core-ktx:1.1.0-alpha04'
-    implementation 'androidx.appcompat:appcompat:' + rootProject.appCompatVersion
-    implementation 'androidx.cardview:cardview:' + rootProject.cardViewVersion
-    implementation 'androidx.recyclerview:recyclerview:' + rootProject.recyclerVersion
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-beta01'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
-    implementation "androidx.lifecycle:lifecycle-extensions:" + rootProject.lifecycle_version
-    implementation 'androidx.constraintlayout:constraintlayout:' + rootProject.constraintLayoutVersion
-    implementation 'com.romandanylyk:pageindicatorview:1.0.3'
-    implementation "androidx.paging:paging-runtime:" + rootProject.paging_version
+    implementation "androidx.core:core-ktx:1.2.0-alpha03"
+    implementation "androidx.appcompat:appcompat:1.1.0-rc01"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0-alpha03"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.0-beta2"
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation "androidx.recyclerview:recyclerview:1.0.0"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02"
+    implementation "androidx.paging:paging-runtime:2.1.0"
+    implementation "com.romandanylyk:pageindicatorview:1.0.3"
+    implementation "io.github.luizgrp.sectionedrecyclerviewadapter:sectionedrecyclerviewadapter:2.0.0"
+    implementation "com.kaopiz:kprogresshud:1.2.0"
 
     // Navigation
-    implementation 'android.arch.navigation:navigation-fragment-ktx:' + rootProject.navigationVersion
-    implementation 'android.arch.navigation:navigation-ui-ktx:' + rootProject.navigationVersion
-    implementation 'io.github.luizgrp.sectionedrecyclerviewadapter:sectionedrecyclerviewadapter:1.2.0'
-    implementation 'com.kaopiz:kprogresshud:1.2.0'
+    implementation "android.arch.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
+    implementation "android.arch.navigation:navigation-fragment:$rootProject.navigationVersion"
+    implementation "android.arch.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
 
     //maps
-    implementation 'com.google.android.gms:play-services-maps:16.1.0'
-    implementation 'com.google.android.gms:play-services-location:16.0.0'
+    implementation "com.google.android.gms:play-services-maps:17.0.0"
+    implementation "com.google.android.gms:play-services-location:17.0.0"
 
-    //Others
-    implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
+    //Core
     implementation project(":CoreNetwork")
-    implementation 'android.arch.navigation:navigation-fragment:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }

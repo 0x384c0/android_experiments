@@ -8,6 +8,25 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--UI-->
+    <style name="AppTheme.TextInputLayout" parent="ThemeOverlay.MaterialComponents.TextInputEditText.FilledBox.Dense">
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_height">60dp</item>
+    </style>
+
+    <style name="AppTheme.TextInputLayout.Disabled" parent="ThemeOverlay.MaterialComponents.TextInputEditText.FilledBox.Dense">
+        <item name="boxBackgroundColor">@color/grayLineColor</item>
+    </style>
+
+    <style name="AppTheme.TextInputEditText">
+        <item name="android:textColor">@color/blackTextColor</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:imeOptions">actionNext</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:inputType">text</item>
+        <item name="android:selectAllOnFocus">true</item>
+    </style>
 
 
     <!--alerts-->

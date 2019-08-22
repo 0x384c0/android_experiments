@@ -30,7 +30,7 @@ class ArticlesDetailsFragment : BaseMVVMFragment<ArticlesDetailsViewModel>() {
         viewModel.articleDetails.observe(this) {
             adapter.data = it
         }
-        viewModel.setup(ArticlesDetailsFragmentArgs.fromBundle(arguments).articleItem)
+        viewModel.setup(ArticlesDetailsFragmentArgs.fromBundle(arguments!!).articleItem)
     }
     //endregion
 
