@@ -1,0 +1,3 @@
+include ':app'
+include ':coreNetwork'
+project(":coreNetwork").projectDir = file("../CoreNetwork")

@@ -1,0 +1,58 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+    lane :test do
+      gradle(task: "test")
+    end
+
+    desc "Build Debug"
+    lane :assembleDebug do
+        gradle(task: "clean assembleDebug")
+    end
+
+    desc "Submit a new Beta Build to Crashlytics Beta"
+    lane :beta do
+
+      changeLog = `git log $(git describe --tags --abbrev=0 $(git rev-list --tags --skip=1  --max-count=1))..HEAD --pretty=format:"%s"`
+      changeLog = changeLog.gsub!(/[^0-9A-Za-zА-Яа-я\n ]/, '')
+      version = `git tag --sort=-creatordate | head -1`
+
+      gradle(task: "clean assembleBeta")
+      crashlytics(
+        api_token: ENV['FABRIC_API_TOKEN'],
+        build_secret: ENV['FABRIC_BUILD_SECRET'],
+        notes: "App version #{version} Changelog:\n#{changeLog}",
+        groups: "crashlytics-testers"
+      )
+    end
+
+    desc "Deploy a new version to the Google Play"
+    lane :deploy do
+      gradle(task: "clean bundleRelease")
+      aab_path = lane_context[SharedValues::GRADLE_AAB_OUTPUT_PATH].to_s
+      sh("mkdir -p ~/Downloads/android_artifacts")
+      sh("rm -f ~/Downloads/android_artifacts/*.aab")
+      sh("cp #{aab_path} ~/Downloads/android_artifacts/")
+      # upload_to_play_store(
+      #     skip_upload_apk: 'true',
+      #     aab: aab_path,
+      #     track: 'internal'
+      # )
+    end
+end

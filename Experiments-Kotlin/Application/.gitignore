@@ -53,3 +53,5 @@ build
 *.ipr
 *~
 *.swp
+
+!gradle.properties
