@@ -19,11 +19,15 @@ increment_version:
 	sh scripts/set_version.sh $$NEW_APP_VERSION &&\
 	rm -f "CoreNetwork/build.gradlebak" "Application/app/build.gradlebak"  &&\
 	echo "When done, enter commands:" &&\
-	echo "	git add \"CoreNetwork/build.gradle\" \"Application/app/build.gradle\"" &&\
+	echo "	git add \"$(PROJECT_DIR)app/build.gradle\"" &&\
 	echo "	git commit -m \"version $$NEW_APP_VERSION\"" &&\
+	echo "then:" &&\
+	echo "	git flow release start \"$$NEW_APP_VERSION\"" &&\
+	echo "	export GIT_MERGE_AUTOEDIT=no && git flow release finish -m \"Merged $$NEW_APP_VERSION\" \"$$NEW_APP_VERSION\" && unset GIT_MERGE_AUTOEDIT" &&\
+	echo "	git push --all && git push --tags" &&\
+	echo "or:" &&\
 	echo "	git tag $$NEW_APP_VERSION" &&\
-	echo "	git push --all" &&\
-	echo "	git push --tags" &&\
+	echo "	git push --all && git push --tags" &&\
 	echo "	"
 
 create_release:
