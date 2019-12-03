@@ -17,7 +17,7 @@ import com.example.experimentskotlin.util.extensions.observe
 import com.example.experimentskotlin.util.infinity_scroll.InfinityScrollManager
 import kotlinx.android.synthetic.main.item_article.view.*
 import kotlinx.android.synthetic.main.item_operation_section_date.view.*
-import kotlinx.android.synthetic.main.view_recycler_view_infinity_scroll.*
+import kotlinx.android.synthetic.main.view_recycler_view_swipe_refresh.*
 
 
 /**
