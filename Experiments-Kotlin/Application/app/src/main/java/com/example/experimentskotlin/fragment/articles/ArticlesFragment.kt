@@ -15,10 +15,10 @@ import com.example.experimentskotlin.util.extensions.observe
 import com.example.experimentskotlin.util.infinity_scroll.InfinityScrollManager
 import kotlinx.android.synthetic.main.item_article.view.*
 import kotlinx.android.synthetic.main.view_recycler_view_infinity_scroll.*
+import kotlinx.android.synthetic.main.view_recycler_view_swipe_refresh.*
 
-class ArticlesFragment : BaseMVVMFragment<ArticlesViewModel>() {
+class ArticlesFragment : BaseMVVMFragment() {
     //region Overrides
-    override val viewModelClass = ArticlesViewModel::class.java
     override val layoutID = R.layout.fragment_articles
     //endregion
 
@@ -31,8 +31,9 @@ class ArticlesFragment : BaseMVVMFragment<ArticlesViewModel>() {
     //endregion
 
     //region Data Binding
+    private lateinit var viewModel:ArticlesViewModel
     override fun bindData() {
-        super.bindData()
+        viewModel = getViewModel(ArticlesViewModel::class.java)
         viewModel.recyclerViewDataBinding.observe(this) {
             adapter.data = it
         }

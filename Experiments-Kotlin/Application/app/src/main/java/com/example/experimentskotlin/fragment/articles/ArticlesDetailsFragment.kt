@@ -11,9 +11,8 @@ import com.example.experimentskotlin.util.extensions.observe
 import kotlinx.android.synthetic.main.fragment_article_details.*
 import kotlinx.android.synthetic.main.item_article.view.*
 
-class ArticlesDetailsFragment : BaseMVVMFragment<ArticlesDetailsViewModel>() {
+class ArticlesDetailsFragment : BaseMVVMFragment() {
     //region Overrides
-    override val viewModelClass = ArticlesDetailsViewModel::class.java
     override val layoutID = R.layout.fragment_article_details
     //endregion
 
@@ -25,8 +24,9 @@ class ArticlesDetailsFragment : BaseMVVMFragment<ArticlesDetailsViewModel>() {
     //endregion
 
     //region Data Binding
+    private lateinit var viewModel:ArticlesDetailsViewModel
     override fun bindData() {
-        super.bindData()
+        viewModel = getViewModel(ArticlesDetailsViewModel::class.java)
         viewModel.articleDetails.observe(this) {
             adapter.data = it
         }

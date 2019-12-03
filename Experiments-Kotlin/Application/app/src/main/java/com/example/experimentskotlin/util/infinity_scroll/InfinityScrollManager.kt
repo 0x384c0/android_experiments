@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.corenetwork.external.infinitescroll.InfiniteScrollListener
 import kotlinx.android.synthetic.main.view_recycler_view_infinity_scroll.*
+import kotlinx.android.synthetic.main.view_recycler_view_swipe_refresh.*
 
 /**
  * Класс для управления пагинацией

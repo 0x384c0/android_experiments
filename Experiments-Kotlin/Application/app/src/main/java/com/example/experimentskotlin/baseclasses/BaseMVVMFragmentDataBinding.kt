@@ -10,24 +10,21 @@ import androidx.databinding.ViewDataBinding
 /**
  * базовый класс для фрагмента с DataBinding
  */
-abstract class BaseMVVMFragmentDataBinding<T:BaseViewModel,B: ViewDataBinding>:BaseMVVMFragment<T>(){
-    abstract fun onGetViewModel(viewModel:T) // binding.viewModel = viewModel // must be called here
+abstract class BaseMVVMFragmentDataBinding<B : ViewDataBinding> : BaseMVVMFragment() {
+    //region Binding
+    lateinit var binding: B
+    //endregion
 
-    //LifeCycle
+
+    // binding.viewModel = viewModel // must be called in bindData()
+
+    //region LifeCycle
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, layoutID,container,false)
-        return  binding.root
+        binding = DataBindingUtil.inflate(inflater, layoutID, container, false)
+        return binding.root
     }
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        onGetViewModel(viewModel)
-    }
-
-    //Binding
-    lateinit var binding: B
-
-
+    //endregion
 }

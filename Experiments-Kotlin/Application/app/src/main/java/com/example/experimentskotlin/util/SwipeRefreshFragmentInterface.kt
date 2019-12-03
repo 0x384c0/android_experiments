@@ -9,45 +9,49 @@ import com.example.experimentskotlin.util.extensions.observe
 /**
  * Интерфейс для Fragment с SwipeRefresh
  */
-interface SwipeRefreshFragmentInterface{
+interface SwipeRefreshFragmentInterface {
     fun getViewModel(): SwipeRefreshViewModelInterface
     fun getSwipeRefreshLayout(): SwipeRefreshLayout
     /**
      * должен вызываться после super.bindData()
      */
-    fun bindSwipeRefreshLoading(fragment: BaseFragment, refreshHandler:()->Unit, hideLoadingHandler:(()->Unit)? = null){
+    fun bindSwipeRefreshLoading(
+        fragment: BaseFragment,
+        refreshHandler: () -> Unit,
+        hideLoadingHandler: (() -> Unit)? = null
+    ) {
         getSwipeRefreshLayout().setOnRefreshListener(refreshHandler)
-        getViewModel().baseLoadingBinding.observe(fragment){
+        getViewModel().baseLoadingBinding.observe(fragment) {
             fragment.showLoading()
         }
         val baseViewModel = (getViewModel() as? BaseViewModel)
         if (baseViewModel != null) {
             baseViewModel.showLoadingBinding.removeObservers(fragment)
-            baseViewModel.showLoadingBinding.observe(fragment){
-                getSwipeRefreshLayout().isRefreshing = true
-            }
-            baseViewModel.hideLoadingBinding.removeObservers(fragment)
-            baseViewModel.hideLoadingBinding.observe(fragment){
-                getSwipeRefreshLayout().isRefreshing = false
-                fragment.hideLoading()
-                hideLoadingHandler?.invoke()
+            baseViewModel.showLoadingBinding.observe(fragment) {
+                if (it)
+                    getSwipeRefreshLayout().isRefreshing = true
+                else {
+                    getSwipeRefreshLayout().isRefreshing = false
+                    fragment.hideLoading()
+                    hideLoadingHandler?.invoke()
+                }
             }
         }
     }
-    fun handleShowAlert(){
+
+    fun handleShowAlert() {
         getSwipeRefreshLayout().isRefreshing = false
     }
 
 }
 
 
-
 /**
  * Интерфейс для ViewModel с SwipeRefresh
  */
-interface SwipeRefreshViewModelInterface{
+interface SwipeRefreshViewModelInterface {
     var baseLoadingBinding: MutableLiveData<Unit>
-    fun showBaseLoading(){
+    fun showBaseLoading() {
         baseLoadingBinding.postValue(Unit)
     }
 }

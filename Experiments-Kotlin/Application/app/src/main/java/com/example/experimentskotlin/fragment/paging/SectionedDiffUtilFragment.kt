@@ -24,8 +24,7 @@ import kotlinx.android.synthetic.main.view_recycler_view_swipe_refresh.*
  * A simple [Fragment] subclass.
  *
  */
-class SectionedDiffUtilFragment : BaseMVVMFragment<SectionedDiffUtilViewModel>() {
-    override val viewModelClass = SectionedDiffUtilViewModel::class.java
+class SectionedDiffUtilFragment : BaseMVVMFragment() {
     override val layoutID = R.layout.fragment_paging_sectioned
 
     //region LifeCycle
@@ -62,8 +61,9 @@ class SectionedDiffUtilFragment : BaseMVVMFragment<SectionedDiffUtilViewModel>()
     //endregion
 
     //region Data Binding
+    private lateinit var viewModel:SectionedDiffUtilViewModel
     override fun bindData() {
-        super.bindData()
+        viewModel = getViewModel(SectionedDiffUtilViewModel::class.java)
         viewModel.recyclerViewDataBinding.observe(this) {
             adapter.calculateAndSetDataInBackgroundThread(
                     items = it,

@@ -7,10 +7,9 @@ import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseViewModel : ViewModel() {
     //Binding
-    val showAlertBinding: MutableLiveData<Throwable> = MutableLiveData()
-    val showAlertStringBinding: MutableLiveData<String> = MutableLiveData()
-    val showLoadingBinding: MutableLiveData<Unit> = MutableLiveData()
-    val hideLoadingBinding: MutableLiveData<Unit> = MutableLiveData()
+    val showAlertBinding = MutableLiveData<Throwable>()
+    val showAlertStringBinding = MutableLiveData<String>()
+    val showLoadingBinding = MutableLiveData(false)
 
     open fun onCreate(){}
     open fun onResume(){}
@@ -29,11 +28,11 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     fun showLoading() {
-        showLoadingBinding.postValue(Unit)
+        showLoadingBinding.postValue(true)
     }
 
     fun hideLoading() {
-        hideLoadingBinding.postValue(Unit)
+        showLoadingBinding.postValue(false)
     }
 
 }

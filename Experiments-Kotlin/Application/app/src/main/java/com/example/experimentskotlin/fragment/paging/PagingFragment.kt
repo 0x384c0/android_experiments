@@ -13,10 +13,9 @@ import kotlinx.android.synthetic.main.fragment_paging.*
 import kotlinx.android.synthetic.main.item_article.view.*
 
 
-class PagingFragment : BaseMVVMFragment<PagingViewModel>() {
+class PagingFragment : BaseMVVMFragment() {
 
     //region Overrides
-    override val viewModelClass = PagingViewModel::class.java
     override val layoutID = R.layout.fragment_paging
     //endregion
 
@@ -25,6 +24,11 @@ class PagingFragment : BaseMVVMFragment<PagingViewModel>() {
         super.onActivityCreated(savedInstanceState)
         viewModel.setup()
         setupRecyclerView()
+    }
+    //endregion
+    private lateinit var viewModel:PagingViewModel
+    override fun bindData() {
+        viewModel = getViewModel(PagingViewModel::class.java)
     }
     //endregion
 

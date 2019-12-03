@@ -1,9 +1,9 @@
 package com.example.experimentskotlin
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 import com.example.corenetwork.Api
 
-class MyApplication: Application() {
+class MyApplication: MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         Api.init()
