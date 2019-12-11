@@ -18,14 +18,14 @@ increment_version:
 	source scripts/incr_version.sh $$APP_VERSION  &&\
 	sh scripts/set_version.sh $$NEW_APP_VERSION &&\
 	rm -f "$(PROJECT_DIR)app/build.gradlebak"  &&\
-	echo "When done, enter commands:" &&\
+	echo "# When done, enter commands:" &&\
 	echo "	git add \"$(PROJECT_DIR)app/build.gradle\"" &&\
 	echo "	git commit -m \"version $$NEW_APP_VERSION\"" &&\
-	echo "then:" &&\
+	echo "" && echo "# then:" &&\
 	echo "	git flow release start \"$$NEW_APP_VERSION\"" &&\
 	echo "	export GIT_MERGE_AUTOEDIT=no && git flow release finish -m \"Merged $$NEW_APP_VERSION\" \"$$NEW_APP_VERSION\" && unset GIT_MERGE_AUTOEDIT" &&\
 	echo "	git push --all && git push --tags" &&\
-	echo "or:" &&\
+	echo "" && echo "# or:" &&\
 	echo "	git tag $$NEW_APP_VERSION" &&\
 	echo "	git push --all && git push --tags" &&\
 	echo "	"
