@@ -1,4 +1,4 @@
-package com.example.experimentskotlin.util
+package com.example.experimentskotlin.util.decorations
 
 import android.graphics.Rect
 import android.view.View
