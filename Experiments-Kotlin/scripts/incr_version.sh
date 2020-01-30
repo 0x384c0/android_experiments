@@ -1,19 +1,19 @@
 #!/bin/sh
 function banner {
-    if [ -z "$TERM" ]; then echo "######## $1 #######";
-    else echo "$(tput setaf 5; tput bold;)######## $1 #######$(tput sgr0)"; fi
+    if [ -z "$TERM" ]; then >&2 echo "######## $1 #######";
+    else >&2 echo "$(tput setaf 5; tput bold;)######## $1 #######$(tput sgr0)"; fi
 }
 function info {
-    if [ -z "$TERM" ];then echo "INFO: $1";
-    else echo "$(tput setaf 2; tput bold;)INFO: $1$(tput sgr0)"; fi
+    if [ -z "$TERM" ];then >&2 echo "INFO: $1";
+    else >&2 echo "$(tput setaf 2; tput bold;)INFO: $1$(tput sgr0)"; fi
 }
 function warn {
-    if [ -z "$TERM" ];then echo "WARNING: $1";
-    else echo "$(tput setaf 3; tput bold;)WARNING: $1$(tput sgr0)"; fi
+    if [ -z "$TERM" ];then >&2 echo "WARNING: $1";
+    else >&2 echo "$(tput setaf 3; tput bold;)WARNING: $1$(tput sgr0)"; fi
 }
 function error {
-    if [ -z "$TERM" ];then echo "ERROR: $1";
-    else echo "$(tput setaf 1; tput bold;)ERROR: $1$(tput sgr0)"; fi
+    if [ -z "$TERM" ];then >&2 echo "ERROR: $1";
+    else >&2 echo "$(tput setaf 1; tput bold;)ERROR: $1$(tput sgr0)"; fi
 }
 
 OLD_VERSION_STR=$1
@@ -46,5 +46,6 @@ info "Old version number: $OLD_VERSION_STR"
 info "New version number: $NEW_VERSION_STR"
 
 #save
-export NEW_APP_VERSION=$NEW_VERSION_STR
 banner DONE
+
+echo $NEW_VERSION_STR

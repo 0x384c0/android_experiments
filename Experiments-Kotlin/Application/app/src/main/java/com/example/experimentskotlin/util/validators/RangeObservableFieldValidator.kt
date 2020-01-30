@@ -36,8 +36,8 @@ open class RangeObservableFieldValidator(
     private fun getInvalidNumberErrorMessage(text: String): String? {
         try {
             val number = text.toDouble()
-            val min = getMin()!!
-            val max = getMax()!!
+            val min = getMin() ?: 0.0
+            val max = if (getMax() != null && getMax() != 0.0) getMax()!! else Double.MAX_VALUE
             val valid = number in min..max
             if (!valid)
                 return getInvalidRangeString()

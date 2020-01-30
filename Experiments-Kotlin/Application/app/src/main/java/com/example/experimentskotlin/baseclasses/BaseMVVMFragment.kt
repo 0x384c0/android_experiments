@@ -43,6 +43,7 @@ abstract class BaseMVVMFragment : BaseFragment() {
         val vm = ViewModelProvider(this).get<T>(vmClass)
         if (vm is BaseViewModel) {
             bindViewModel(vm)
+            vm.setup(context!!)
         }
         return vm
     }
