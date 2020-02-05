@@ -1,6 +1,7 @@
 package com.example.experimentskotlin.util.localize
 
 import android.content.Context
+import android.util.Log
 import com.example.corenetwork.extension.getLocalizedString
 import com.example.experimentskotlin.R
 
@@ -13,7 +14,7 @@ open class BaseLocalizer {
     companion object {
         internal fun translateString(context: Context, string: String): String {
             try {
-                val id = stringsMap?.get(string)
+                val id = stringsMap[string]
                 if (id != null) {
                     return context.resources.getLocalizedString(id)
                 }
@@ -26,16 +27,17 @@ open class BaseLocalizer {
         fun init(applicationContext: Context) {
             val fields = R.string::class.java.fields
             val mutableStringsMap = mutableMapOf<String, Int>()
-            for (filed in fields) {
+            for (field in fields) {
                 try {
-                    val id = filed.getInt(R.string::class.java)
-                    mutableStringsMap[applicationContext.getLocalizedString(id)] = id
+                    val id = field.getInt(R.string::class.java)
+                    mutableStringsMap[applicationContext.getString(id)] = id
                 } catch (e: Exception) {
+                    Log.e("BaseLocalizer", e.localizedMessage, e)
                 }
             }
             stringsMap = mutableStringsMap.toMap()
         }
 
-        private var stringsMap: Map<String, Int>? = null
+        private lateinit var stringsMap: Map<String, Int>
     }
 }
