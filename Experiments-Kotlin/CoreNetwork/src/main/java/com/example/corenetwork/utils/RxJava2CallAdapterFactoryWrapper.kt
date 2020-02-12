@@ -12,16 +12,15 @@ class RxJava2CallAdapterFactoryWrapper(
     private val factory: RxJava2CallAdapterFactory,
     private val mapObservable: (Observable<*>) -> Observable<*>,
     private val mapCompletable: (Completable) -> Completable
-) :
-    CallAdapter.Factory() {
+) : CallAdapter.Factory() {
     override fun get(
         returnType: Type,
         annotations: Array<Annotation>,
         retrofit: Retrofit
     ): CallAdapter<*, *>? {
         val adapter = factory.get(returnType, annotations, retrofit)
-        return if (adapter == null)
-            null
+        return if (adapter == null || annotations.find { it is DoNotWrapRx} != null)
+            adapter
         else
             CallAdapterWrapper(
                 adapter,
@@ -48,3 +47,8 @@ class RxJava2CallAdapterFactoryWrapper(
         }
     }
 }
+
+@Target(AnnotationTarget.FUNCTION)
+@Retention(AnnotationRetention.RUNTIME)
+@MustBeDocumented
+annotation class DoNotWrapRx

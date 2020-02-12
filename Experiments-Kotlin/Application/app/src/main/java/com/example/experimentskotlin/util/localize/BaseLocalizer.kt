@@ -12,7 +12,7 @@ import com.example.experimentskotlin.R
  */
 open class BaseLocalizer {
     companion object {
-        internal fun translateString(context: Context, string: String): String {
+        fun translateString(context: Context, string: String): String {
             try {
                 val id = stringsMap[string]
                 if (id != null) {
