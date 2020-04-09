@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="EditTextDatePicker">
+        <attr name="hint_date_picker" format="string" />
+        <attr name="dateFormat" format="string" />
+    </declare-styleable>
+</resources>

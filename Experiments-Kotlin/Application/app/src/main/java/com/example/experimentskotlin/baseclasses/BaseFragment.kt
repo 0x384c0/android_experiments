@@ -16,13 +16,18 @@ import java.util.*
 abstract class BaseFragment : Fragment() {
     abstract val layoutID: Int
 
-    //UI
+    //region UI
     private var baseActivity: BaseActivity
         get() = activity as BaseActivity
         set(_) {}
+    //endregion
 
-    //LifeCycle
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    //region LifeCycle
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(layoutID, container, false)
     }
 
@@ -41,27 +46,43 @@ abstract class BaseFragment : Fragment() {
         super.onPause()
         hideKeyboard()
     }
+    //endregion
 
     //Others
     internal open fun showAlert(e: Throwable) {
-        baseActivity.showAlert(e)
+        try {
+            baseActivity.showAlert(e)
+        } catch (e: Exception) {
+        }
     }
 
     internal open fun showAlert(text: String) {
-        baseActivity.showAlert(text)
+        try {
+            baseActivity.showAlert(null, text)
+        } catch (e: Exception) {
+        }
     }
 
     internal open fun showLoading() {
-        baseActivity.showLoading()
+        try {
+            baseActivity.showLoading()
+        } catch (e: Exception) {
+        }
     }
 
     internal open fun hideLoading() {
-        baseActivity.hideLoading()
+        try {
+            baseActivity.hideLoading()
+        } catch (e: Exception) {
+        }
     }
 
 
     internal open fun hideKeyboard() {
-        baseActivity.hideKeyboard()
+        try {
+            baseActivity.hideKeyboard()
+        } catch (e: Exception) {
+        }
     }
 
     //region Workarounds

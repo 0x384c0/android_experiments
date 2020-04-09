@@ -15,7 +15,6 @@ abstract class BaseMVVMFragmentDataBinding<B : ViewDataBinding> : BaseMVVMFragme
     lateinit var binding: B
     //endregion
 
-
     // binding.viewModel = viewModel // must be called in bindData()
 
     //region LifeCycle

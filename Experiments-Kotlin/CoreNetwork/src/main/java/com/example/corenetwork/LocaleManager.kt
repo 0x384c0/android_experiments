@@ -89,7 +89,8 @@ class LocaleManager(
                     observableLoadMaybe = api
                         .getDictionaries(localeSlug) //backend requires locales in ru-ru format
                         .map { localization ->
-                            val localeDictionary = dictionariesProvider.getLocaleDictionary(locale)
+                            val localeDictionary =
+                                dictionariesProvider.getLocaleDictionary(locale)!!
                             localeDictionary.resources = localization.mapKeys {
                                 it.key.replace(
                                     ".",
@@ -101,7 +102,7 @@ class LocaleManager(
                 }
                 val observable = observableLoadMaybe!!
                     .map {
-                        val localeDictionary = dictionariesProvider.getLocaleDictionary(locale)
+                        val localeDictionary = dictionariesProvider.getLocaleDictionary(locale)!!
                         Restring.setStrings(localeDictionary.locale, localeDictionary.resources)
                         true
                     }
@@ -196,7 +197,7 @@ class LocaleManager(
 
     interface DictionariesProvider {
         fun isHasLocaleDictionary(locale: String): Boolean
-        fun getLocaleDictionary(locale: String): LocaleDictionary
+        fun getLocaleDictionary(locale: String): LocaleDictionary?
         fun saveLocaleDictionary(localeDictionary: LocaleDictionary)
     }
 

@@ -4,6 +4,11 @@ import com.example.corenetwork.model.WikiaQueryResponse
 import com.example.corenetwork.model.articles.ArticlesDetailsResponse
 import com.example.corenetwork.model.articles.ArticlesListResponse
 import com.example.corenetwork.model.authsettings.UserInfo
+import com.example.corenetwork.utils.DefaultTimeZoneGsonDateAdapter
+import com.example.corenetwork.utils.GMTGsonDateAdapter
+import com.example.corenetwork.utils.GMTTimeZoneDate
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -13,6 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
+import java.util.*
 
 
 interface Api {
@@ -73,6 +79,14 @@ interface Api {
                 .build()
 
             return retrofit.create(Api::class.java)
+        }
+
+
+        fun createGson(): Gson {
+            return GsonBuilder()
+                .registerTypeAdapter(GMTTimeZoneDate::class.java, GMTGsonDateAdapter())
+                .registerTypeAdapter(Date::class.java, DefaultTimeZoneGsonDateAdapter())
+                .create()
         }
 
         fun getClientBuilderWithAuth(): OkHttpClient.Builder {

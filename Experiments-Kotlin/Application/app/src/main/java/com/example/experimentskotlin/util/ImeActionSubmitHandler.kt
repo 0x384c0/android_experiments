@@ -5,6 +5,10 @@ import android.widget.Button
 import android.widget.EditText
 import com.example.experimentskotlin.baseclasses.BaseFragment
 
+/*
+imeActionSubmitHandler =
+            ImeActionSubmitHandler(binding.editTextPassword, binding.buttonNext, this)
+ */
 
 class ImeActionSubmitHandler(
     editTexts: List<EditText>,

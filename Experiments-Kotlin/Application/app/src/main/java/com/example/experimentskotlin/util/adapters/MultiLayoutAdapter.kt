@@ -4,6 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 
 /**
@@ -12,18 +15,19 @@ import androidx.recyclerview.widget.RecyclerView
  * https://developer.android.com/reference/android/support/v7/widget/RecyclerView.Adapter
  */
 class MultiLayoutAdapter(
-    context:Context,
-    itemViewHolderFactories: List<((View) -> BaseMultiLayoutItemViewHolder<Any>)>
-) : RecyclerView.Adapter<MultiLayoutAdapter.BaseMultiLayoutItemViewHolder<Any>>() {
+    context: Context,
+    itemViewHolderFactories: List<((View) -> BaseMultiItemViewHolder<*>)>
+) : RecyclerView.Adapter<BaseMultiItemViewHolder<Any>>() {
 
     //region Init
-    private val factoryMap:Map<Int,((View) -> BaseMultiLayoutItemViewHolder<Any>)>
-    private val typesMap:Map<Class<out Any>,Int>
-    private val layoutIdMap:Map<Int,Int>
+    private val factoryMap: Map<Int, ((View) -> BaseMultiItemViewHolder<*>)>
+    private val typesMap: Map<Class<out Any>, Int>
+    private val layoutIdMap: Map<Int, Int>
+
     init {
-        val factoryMap = mutableMapOf<Int,((View) -> BaseMultiLayoutItemViewHolder<Any>)>()
-        val typesMap = mutableMapOf<Class<Any>,Int>()
-        val layoutIdMap = mutableMapOf<Int,Int>()
+        val factoryMap = mutableMapOf<Int, ((View) -> BaseMultiItemViewHolder<*>)>()
+        val typesMap = mutableMapOf<Class<*>, Int>()
+        val layoutIdMap = mutableMapOf<Int, Int>()
         val dummyView = View(context)
         itemViewHolderFactories.forEachIndexed { index, factory ->
             factoryMap[index] = factory
@@ -52,23 +56,53 @@ class MultiLayoutAdapter(
         return typesMap.getValue(dataClass)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseMultiLayoutItemViewHolder<Any> {
-        val view = LayoutInflater.from(parent.context).inflate(layoutIdMap.getValue(viewType), parent, false)
-        val factory = factoryMap.getValue(viewType)
-        return factory(view)
+    @Suppress("UNCHECKED_CAST")
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): BaseMultiItemViewHolder<Any> {
+        val factory = factoryMap[viewType]
+            ?: throw IllegalStateException("view holder factory for $viewType not found")
+
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val view = layoutInflater
+            .inflate(layoutIdMap.getValue(viewType), parent, false)
+        var vh = factory(view) as BaseMultiItemViewHolder<Any>
+
+        if (vh is BaseMVVMMultiItemViewHolder<*, *>) {
+            val binding = DataBindingUtil
+                .inflate<ViewDataBinding>(
+                    layoutInflater,
+                    layoutIdMap.getValue(viewType),
+                    parent,
+                    false
+                );
+            val mvvmVh = factory(binding.root) as BaseMVVMMultiItemViewHolder<*, ViewDataBinding>
+            mvvmVh.binding = binding
+            vh = mvvmVh as BaseMultiItemViewHolder<Any>
+        }
+
+        return vh
     }
 
     override fun getItemCount(): Int {
         return _data.count()
     }
 
-    override fun onBindViewHolder(holder: BaseMultiLayoutItemViewHolder<Any>, position: Int) {
+    override fun onBindViewHolder(holder: BaseMultiItemViewHolder<Any>, position: Int) {
         holder.setup(_data[position])
     }
     //endregion
+}
 
-    abstract class BaseMultiLayoutItemViewHolder<T>(view: View) : BaseItemViewHolder<T>(view) {
-        abstract val dataClass:Class<T>
-        abstract val itemLayoutId:Int
-    }
+abstract class BaseMultiItemViewHolder<T>(view: View) : BaseItemViewHolder<T>(view) {
+    abstract val dataClass: Class<T>
+    abstract val itemLayoutId: Int
+}
+
+abstract class BaseMVVMMultiItemViewHolder<T : ViewModel, B : ViewDataBinding>(
+    view: View
+) :
+    BaseMultiItemViewHolder<T>(view) {
+    lateinit var binding: B//binding.viewModel = viewModel
 }

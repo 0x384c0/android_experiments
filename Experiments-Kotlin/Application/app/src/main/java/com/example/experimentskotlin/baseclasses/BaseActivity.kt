@@ -14,12 +14,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.content.ContextCompat
-import com.example.corenetwork.Api
-import com.example.corenetwork.extension.getLocalizedString
 import com.example.corenetwork.model.ErrorResponse
 import com.example.experimentskotlin.R
-import com.example.experimentskotlin.view.custom.StyledAlertDialogBuilder
 import com.kaopiz.kprogresshud.KProgressHUD
 import io.reactivex.disposables.CompositeDisposable
 
@@ -32,7 +28,6 @@ abstract class BaseActivity : AppCompatActivity() {
     //region LifeCycle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        api = Api.getInstance()
         setupLoading()
     }
 
@@ -48,21 +43,22 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         unSubscribeFromEvents()
-        compositeDisposable.dispose()
+        alertDialog?.dismiss()
+        progressHud.dismiss()
+        super.onDestroy()
     }
     //endregion
 
     //region others
-    lateinit var api: Api
-    val compositeDisposable = CompositeDisposable()
-
     fun hideKeyboard() {
         val view = currentFocus
         if (view != null) {
             val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputManager.hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+            inputManager.hideSoftInputFromWindow(
+                view.windowToken,
+                InputMethodManager.HIDE_NOT_ALWAYS
+            )
             val rootView: View = findViewById(android.R.id.content)
             rootView.isFocusable = true
             rootView.isFocusableInTouchMode = true
@@ -81,21 +77,20 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     fun showAlert(e: Throwable) {
-//        Crashlytics.logException(e)
-        val text = ErrorResponse.create(e)?.getErrorMessage() ?: e.localizedMessage
-        if (text != null)
-            showAlert(text)
-        else
-            throw e
+        showAlert(
+            getString(R.string.error),
+            ErrorResponse.create(e)?.getErrorMessage() ?: e.localizedMessage ?: e.toString()
+        )
     }
 
     private var alertDialog: AlertDialog? = null
-    fun showAlert(text: String) {
+    fun showAlert(title: String?, text: String) {
         hideLoading()
         alertDialog?.cancel()
-        alertDialog = StyledAlertDialogBuilder(this)
+        alertDialog = AlertDialog.Builder(this, R.style.AppTheme_AlertDialogTheme)
+            .setTitle(title)
             .setMessage(text)
-            .setNegativeButton(getLocalizedString(R.string.close)) { d, _ -> d.cancel() }
+            .setNegativeButton(getString(R.string.close)) { d, _ -> d.cancel() }
             .create()
         alertDialog?.show()
     }
@@ -107,7 +102,12 @@ abstract class BaseActivity : AppCompatActivity() {
     private lateinit var loadingAnimation: AlphaAnimation
     private fun setupLoading() {
         loadingImageView = ImageView(this)
-        loadingImageView.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.ic_launcher_background))
+        loadingImageView.setImageDrawable(
+            AppCompatResources.getDrawable(
+                this,
+                R.drawable.ic_launcher_background
+            )
+        )
         loadingImageView.scaleType = ImageView.ScaleType.CENTER_CROP
 
         loadingAnimation = AlphaAnimation(0.4f, 1.0f)
@@ -120,10 +120,7 @@ abstract class BaseActivity : AppCompatActivity() {
             .create(this)
             .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
             .setCancellable(false)
-            .setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent))
-            .setCustomView(loadingImageView)
-            .setDimAmount(0.5f)
-            .setCornerRadius(16f)
+            .setLabel(getString(R.string.loading))
     }
 
     fun showLoading() {
@@ -164,7 +161,8 @@ abstract class BaseActivity : AppCompatActivity() {
             return
         }
         this.doubleBackToExitPressedOnce = true
-        Toast.makeText(this, getLocalizedString(R.string.press_back_again_to_exit), Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.press_back_again_to_exit), Toast.LENGTH_SHORT)
+            .show()
         Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
     }
     //endregion

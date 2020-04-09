@@ -9,7 +9,7 @@ open class RangeObservableFieldValidator(
     field: ObservableField<String?>,
     errorField: ObservableField<String?>?,
     emptyErrorMessage: String?,
-    private val getInvalidRangeString:() -> String?,
+    private val getInvalidRangeString: () -> String?,
     private val getMin: () -> Double?,
     private val getMax: () -> Double?
 ) : EmptyStringObservableFieldValidator(
@@ -35,7 +35,7 @@ open class RangeObservableFieldValidator(
 
     private fun getInvalidNumberErrorMessage(text: String): String? {
         try {
-            val number = text.toDouble()
+            val number = text.toDoubleOrNull() ?: 0.toDouble()
             val min = getMin() ?: 0.0
             val max = if (getMax() != null && getMax() != 0.0) getMax()!! else Double.MAX_VALUE
             val valid = number in min..max
@@ -46,7 +46,7 @@ open class RangeObservableFieldValidator(
         return null
     }
 
-    private fun validateNumber(text:String): Boolean {
+    private fun validateNumber(text: String): Boolean {
         val invalidErrorMessage = getInvalidNumberErrorMessage(text)
         return if (invalidErrorMessage == null) {
             errorField?.set(null)

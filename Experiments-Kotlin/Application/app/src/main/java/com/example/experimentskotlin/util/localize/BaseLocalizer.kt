@@ -2,7 +2,6 @@ package com.example.experimentskotlin.util.localize
 
 import android.content.Context
 import android.util.Log
-import com.example.corenetwork.extension.getLocalizedString
 import com.example.experimentskotlin.R
 
 /**

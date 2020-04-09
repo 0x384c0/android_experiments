@@ -78,3 +78,15 @@ abstract class BaseLocalizationActivity : AppCompatActivity() {
 //        navController.addOnDestinationChangedListener(navDestinationLocalizer)
 //    }
 //}
+
+
+/*
+import com.jcminarro.philology.Philology
+import io.github.inflationx.viewpump.ViewPumpContextWrapper
+
+abstract class BaseLocalizedActivity : AppCompatActivity() {
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(Philology.wrap(newBase)))
+    }
+}
+*/

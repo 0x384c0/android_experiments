@@ -4,14 +4,23 @@
     <string name="test_query">Test Query</string>
     <string name="loaded_image">Loaded Image</string>
     <string name="load_image">Load Image</string>
-    <string name="close">close</string>
-    <string name="press_back_again_to_exit">press_back_again_to_exit</string>
+
+
+    <string name="close">Закрыть</string>
+    <string name="cancel">Отмена</string>
+    <string name="ok">OK</string>
+    <string name="press_back_again_to_exit">Нажмите назад для выхода</string>
+    <string name="exit">Выход</string>
+    <string name="error">Ошибка</string>
+    <string name="loading">Загрузка</string>
+    <string name="retry_request">Повторить запрос</string>
+    <string name="field_cannot_be_blank">Поле не может быть пустым</string>
+
     <string name="location_permission_text">location_permission_text</string>
     <string name="settings">settings</string>
     <string name="to_continue_enable_geolocation">to_continue_enable_geolocation</string>
     <string name="meters_dot">meters_dot</string>
     <string name="kilometers_dot">kilometers_dot</string>
-    <string name="cancel">cancel</string>
     <string name="blank_string"> </string>
     <string name="null_string">NULL</string>
     <string name="articles">Articles</string>

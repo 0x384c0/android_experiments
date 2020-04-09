@@ -15,12 +15,16 @@ class FormValidator(
 
     val formValidator = this
     //region Public
-    val propertyChangedCallback = object : androidx.databinding.Observable.OnPropertyChangedCallback() {
-        override fun onPropertyChanged(sender: androidx.databinding.Observable?, propertyId: Int) {
-            if (formValidator.isEnabled())
-                onFieldChanged(sender as ObservableField<*>)
+    val propertyChangedCallback =
+        object : androidx.databinding.Observable.OnPropertyChangedCallback() {
+            override fun onPropertyChanged(
+                sender: androidx.databinding.Observable?,
+                propertyId: Int
+            ) {
+                if (formValidator.isEnabled())
+                    onFieldChanged(sender as ObservableField<*>)
+            }
         }
-    }
 
     /**
      * проверить перед отправкой

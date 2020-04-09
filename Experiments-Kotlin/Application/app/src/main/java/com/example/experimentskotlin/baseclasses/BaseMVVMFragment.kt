@@ -2,7 +2,7 @@ package com.example.experimentskotlin.baseclasses
 
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.experimentskotlin.util.extensions.observe
 
 
@@ -22,10 +22,15 @@ abstract class BaseMVVMFragment : BaseFragment() {
         callOnCreateIfNeeded()
         viewModels.forEach { it.onResume() }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModels.forEach { it.onDestroy() }
+    }
     //endregion
 
     //region DataBinding
-    internal abstract fun bindData()
+    protected abstract fun bindData()
 
     private var onCreateWasNotCalled = true
     private fun callOnCreateIfNeeded() {
@@ -40,7 +45,7 @@ abstract class BaseMVVMFragment : BaseFragment() {
     private val viewModels = mutableListOf<BaseViewModel>()
 
     protected fun <T : ViewModel> getViewModel(vmClass: Class<T>): T {
-        val vm = ViewModelProvider(this).get<T>(vmClass)
+        val vm = ViewModelProviders.of(this).get(vmClass)
         if (vm is BaseViewModel) {
             bindViewModel(vm)
             vm.setup(context!!)
@@ -56,12 +61,19 @@ abstract class BaseMVVMFragment : BaseFragment() {
         viewModel.showLoadingBinding.observe(this) { loadingIndicatorStateChanged() }
     }
 
+    protected fun isLoading(): Boolean {
+        return viewModels.map { it.showLoadingBinding.value }.contains(true)
+    }
+
     private fun loadingIndicatorStateChanged() {
-        val isNeedShowLoading = viewModels.map { it.showLoadingBinding.value }.contains(true)
-        if (isNeedShowLoading)
-            showLoading()
-        else
-            hideLoading()
+        val isNeedShowLoading = isLoading()
+        try {
+            if (isNeedShowLoading)
+                showLoading()
+            else
+                hideLoading()
+        } catch (e: Exception) {
+        }
     }
     //endregion
 }

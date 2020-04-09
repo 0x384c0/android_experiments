@@ -8,7 +8,7 @@ import androidx.core.view.iterator
  *
  * Класс workaround, переводит меню из resources, тк андроид этого не делает
  */
-class MenuItemLocalizer:BaseLocalizer() {
+class MenuItemLocalizer : BaseLocalizer() {
     companion object {
         /**
          * перевод меню с помощью context.getString
@@ -18,10 +18,10 @@ class MenuItemLocalizer:BaseLocalizer() {
             context: Context,
             menu: Menu
         ) {
-            for (item in menu.iterator()){
+            for (item in menu.iterator()) {
                 val t = item.title?.toString()
                 if (!t.isNullOrBlank())
-                    item.title = translateString(context,t)
+                    item.title = translateString(context, t)
             }
         }
     }

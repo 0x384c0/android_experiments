@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 class SingleLayoutAdapter<T>(
-        private val itemLayoutId: Int,
-        private val itemViewHolderFactory: (View) -> BaseItemViewHolder<T>
+    private val itemLayoutId: Int,
+    private val itemViewHolderFactory: (View) -> BaseItemViewHolder<T>
 ) : RecyclerView.Adapter<BaseItemViewHolder<T>>() {
 
     //region Adapter logic
@@ -37,17 +37,41 @@ class SingleLayoutAdapter<T>(
 
     //region Implementation with handlers
     constructor(
-            itemLayoutId: Int,
-            bindViewHandler: (view: View, data: T) -> Unit,
-            onClickHandler: (position: Int, data: T) -> Unit
+        itemLayoutId: Int,
+        bindViewHandler: (view: View, data: T) -> Unit,
+        onClickHandler: (position: Int, data: T) -> Unit
     ) : this(
-            itemLayoutId = itemLayoutId,
-            itemViewHolderFactory = {
-                ItemViewHolderWithHandler(
-                        it,
-                        bindViewHandler,
-                        onClickHandler
-                )
-            })
+        itemLayoutId = itemLayoutId,
+        itemViewHolderFactory = {
+            ItemViewHolderWithHandler(
+                it,
+                bindViewHandler,
+                onClickHandler
+            )
+        })
     //endregion
+}
+
+abstract class BaseItemViewHolder<T>(var view: View) : RecyclerView.ViewHolder(view) {
+    abstract fun setup(data: T)
+}
+
+class ItemViewHolderWithHandler<T>(
+    view: View,
+    private val bindViewHandler: (view: View, data: T) -> Unit,
+    private val onClickHandler: (position: Int, data: T) -> Unit
+) : BaseItemViewHolder<T>(view), View.OnClickListener {
+    init {
+        view.setOnClickListener(this)
+    }
+
+    var data: T? = null
+    override fun setup(data: T) {
+        this.data = data
+        bindViewHandler.invoke(view, data!!)
+    }
+
+    override fun onClick(p0: View?) {
+        onClickHandler.invoke(adapterPosition, data!!)
+    }
 }

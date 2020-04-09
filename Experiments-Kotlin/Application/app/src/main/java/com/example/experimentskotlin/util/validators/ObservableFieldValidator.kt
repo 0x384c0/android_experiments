@@ -10,7 +10,7 @@ interface ObservableFieldValidator {
     fun isValid(): Boolean
     fun isEmpty(): Boolean
     fun reset()
-    fun isSameField(field:ObservableField<*>):Boolean
+    fun isSameField(field: ObservableField<*>): Boolean
 }
 
 /**
@@ -20,17 +20,17 @@ open class BaseObservableFieldValidator<T>(
     internal val field: ObservableField<T?>,
     internal val errorField: ObservableField<String?>?,
     internal val errorMessage: String?,
-    internal val errorMessageHandler: (() -> String?) = {errorMessage},
+    internal val errorMessageHandler: (() -> String?) = { errorMessage },
     internal val validator: (T?) -> Boolean,
     internal val isEmptyValidator: (T?) -> Boolean
-    ) : ObservableFieldValidator {
+) : ObservableFieldValidator {
     override fun validate(): Boolean {
-        val result =  if (isValid()) {
+        val result = if (isValid()) {
             reset()
             true
         } else {
             if (!isAlreadyValidated())
-                errorField?.set(errorMessage)
+                errorField?.set(errorMessageHandler())
             false
         }
         validateNeverCalled = false
@@ -38,11 +38,11 @@ open class BaseObservableFieldValidator<T>(
     }
 
     internal var validateNeverCalled = true
-    internal var previousValidateValue:T? = null
-    open fun isAlreadyValidated():Boolean{
+    internal var previousValidateValue: T? = null
+    open fun isAlreadyValidated(): Boolean {
         return if (validateNeverCalled)
             false
-        else{
+        else {
             val fieldValue = field.get()
             val alreadyValidated = fieldValue == previousValidateValue
             previousValidateValue = fieldValue
@@ -64,7 +64,7 @@ open class BaseObservableFieldValidator<T>(
         validateNeverCalled = true
     }
 
-    override fun isSameField(field: ObservableField<*>):Boolean{
+    override fun isSameField(field: ObservableField<*>): Boolean {
         return this.field === field
     }
 
@@ -90,7 +90,8 @@ open class EmptyStringObservableFieldValidator(
             false
         else {
             val fieldValue = field.get() ?: ""
-            val alreadyValidated = fieldValue == previousValidateValue && !errorField?.get().isNullOrBlank()
+            val alreadyValidated =
+                fieldValue == previousValidateValue && !errorField?.get().isNullOrBlank()
             previousValidateValue = fieldValue
             alreadyValidated
         }
@@ -111,9 +112,8 @@ open class NullableObjectObservableFieldValidator<T>(
     errorField = errorField,
     errorMessage = errorMessage,
     validator = { it != null },
-    isEmptyValidator = { it == null  }
+    isEmptyValidator = { it == null }
 )
-
 
 
 /**
@@ -123,20 +123,23 @@ class StringHandlerObservableFieldValidator(
     field: ObservableField<String?>,
     errorField: ObservableField<String?>?,
     errorMessage: String?,
-    validator:(String?) -> Boolean
+    errorMessageHandler: (() -> String?) = { errorMessage },
+    validator: (String?) -> Boolean
 ) : BaseObservableFieldValidator<String>(
     field = field,
     errorField = errorField,
     errorMessage = errorMessage,
+    errorMessageHandler = errorMessageHandler,
     validator = { validator(it) },
     isEmptyValidator = { it.isNullOrBlank() }
-){
-    override fun isAlreadyValidated():Boolean{
+) {
+    override fun isAlreadyValidated(): Boolean {
         return if (validateNeverCalled)
             false
-        else{
+        else {
             val fieldValue = field.get() ?: ""
-            val alreadyValidated = fieldValue == previousValidateValue && !errorField?.get().isNullOrBlank()
+            val alreadyValidated =
+                fieldValue == previousValidateValue && !errorField?.get().isNullOrBlank()
             previousValidateValue = fieldValue
             alreadyValidated
         }

@@ -1,7 +1,6 @@
-package com.example.experimentskotlin.util.validators.users
+package com.example.experimentskotlin.util.validators
 
 import androidx.databinding.ObservableField
-import com.example.experimentskotlin.util.validators.EmptyStringObservableFieldValidator
 
 /**
  * валидатор для полей с одинаковым текстом
@@ -17,6 +16,10 @@ class EqualTextFieldValidator(
     errorField = errorField,
     errorMessage = emptyErrorMessage
 ) {
+    override fun isSameField(field: ObservableField<*>): Boolean {
+        return super.isSameField(field) || field === otherField
+    }
+
     override fun isValid(): Boolean {
         val isNotNull = super.isValid()
         return if (isNotNull)
