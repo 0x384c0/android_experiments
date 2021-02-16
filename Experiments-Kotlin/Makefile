@@ -67,3 +67,19 @@ merge_current_to_ci_develop:
 	git merge $$CURRENT_BRANCH &&\
 	git checkout $$CURRENT_BRANCH &&\
 	git push --all origin
+
+
+
+# Utils
+generate_ssl_hash:
+	sh scripts/generate_ssl_hash.sh "https://api.google.com"
+
+enable_wifi_adb:
+	sh scripts/enable_wifi_adb.sh
+
+generate_sms_retriever_app_hash_release:
+	sh scripts/sms_retriever_hash_v9.sh --package "com.0x348c0.app" --keystore "app/apk_signing/release.keystore" --keystore_password "KEYSTORE_PASSWORD"
+
+
+generate_sms_retriever_app_hash_beta:
+	sh scripts/sms_retriever_hash_v9.sh --package "com.0x348c0.app.beta" --keystore "app/apk_signing/beta.keystore" --keystore_password "KEYSTORE_PASSWORD"
